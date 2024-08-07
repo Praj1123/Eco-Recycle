@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Pickup History</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .color {
+            background-color: #067451;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            background-color: #ff9800;
+            padding: 5px 10px;
+            border-radius: none;
+            color: #fff;
+            font-size: 45px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .pending {
+            background-color: #ff9800;
+        }
+
+        .completed {
+            background-color: #4caf50;
+        }
+
+        .cancelled {
+            background-color: #f44336;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                width: 100%;
+            }
+
+            table {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar color text-light">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light"><b>EcoRecycle</b></a>
+
+        </div>
+    </nav>
+    <h1>Pickup Schedule Status History </h1>
+    <div class="container" style="min-height: 100vh;overflow-x:scroll">
+        <table id="scheduleTable">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Requested Date</th>
+                    <th>Brand</th>
+                    <th>Product Name</th>
+                    <th>Product Category</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <p class="text-success mt-5" style="font-size: x-large;display:block;margin:0 auto;text-align:center"
+                    id="text_alert">No Data Found</p>
+                <!-- Data will be inserted here via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+        var data = '';
+        $.ajax({
+            type: 'POST',
+            url: "{{url_for('get_pick_up_history')}}",
+            success: function (response) {
+                if (response.status == 'success') {
+                    document.getElementById('text_alert').style.display = 'none'
+                    data1 = JSON.parse(response.data)
+                    const tableBody = document.querySelector('#scheduleTable tbody');
+                    for (var i = 0; i < data1.length; i++) {
+                        var data = data1[i]
+                        for (key in data) {
+                            item = data[key]
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                    <td>${key}</td>
+                                    <td>${item.request_date}</td>
+                                    <td>${item.brand}</td>
+                                    <td>${item.product_name}</td>
+                                    <td>${item.category}</td>
+                                    <td class='text-success'>${item.status}</td>
+                                    <td><div class="dropdown">
+                                        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                          See Details
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="#">Model: ${item.model_name}</a></li>
+                                          <li><a class="dropdown-item" href="#">Quantity: ${item.qualtity} Unit</a></li>
+                                          <li><a class="dropdown-item" href="#">Weight: ${item.weight} kg</a></li>
+                                          <li><a class="dropdown-item" href="#">Base Price: ${item.product_baseprice}</a></li>
+                                          <li><a class="dropdown-item" href="#">Offerded Amount: ${item.deduce_amount}</a></li>
+                                          <li><a class="dropdown-item" href="#">Pick-up Charges: ${item.total_charges}</a></li>
+                                          <li><a class="dropdown-item" href="#">Address: ${item.address}, ${item.city}, ${item.state}, ${item.zip}</a></li>
+                                          <li><a class="dropdown-item text-success" onclick="sessionStorage.setItem('cc_id','${item.cc_id}');window.location.href = '/to_details_page'"><u>Visit</u></a></li>
+                                        </ul>
+                                      </div></td>
+                                `;
+
+                            tableBody.appendChild(row);
+
+                        }
+                    }
+
+                } else {
+                    if (response.status == 'error') {
+                        console.log(response.message)
+                        document.getElementById('text_alert').innerHTML = response.message
+                    } else {
+                        document.getElementById('text_alert').innerHTML = 'Something went wrong'
+                        alert('Something went wrong')
+                    }
+                }
+
+            },
+            error: function (error) {
+                console.log(error)
+                document.getElementById('text_alert').innerHTML = "We encounter some technical problem"
+                alert('We encounter some technical problem')
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>

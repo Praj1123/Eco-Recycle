@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Sign in</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			overflow: hidden;
+		}
+
+		.wave {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			height: 100%;
+			z-index: -1;
+		}
+
+		.container {
+			width: 100vw;
+			height: 100vh;
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-gap: 7rem;
+			padding: 0 2rem;
+		}
+
+		.img {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+
+		.login-content {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			text-align: center;
+		}
+
+		.img img {
+			width: 500px;
+		}
+
+		form {
+			width: 360px;
+		}
+
+		.login-content img {
+			height: 100px;
+		}
+
+		.login-content h2 {
+			margin: 15px 0;
+			color: #333;
+			text-transform: uppercase;
+			font-size: 2.9rem;
+		}
+
+		.login-content .input-div {
+			position: relative;
+			display: grid;
+			grid-template-columns: 7% 93%;
+			margin: 25px 0;
+			padding: 5px 0;
+			border-bottom: 2px solid #d9d9d9;
+		}
+
+		.login-content .input-div.one {
+			margin-top: 0;
+		}
+
+		.i {
+			color: #d9d9d9;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.i i {
+			transition: .3s;
+		}
+
+		.input-div>div {
+			position: relative;
+			height: 45px;
+		}
+
+		.input-div>div>h5 {
+			position: absolute;
+			left: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: #999;
+			font-size: 18px;
+			transition: .3s;
+		}
+
+		.input-div:before,
+		.input-div:after {
+			content: '';
+			position: absolute;
+			bottom: -2px;
+			width: 0%;
+			height: 2px;
+			background-color: #38d39f;
+			transition: .4s;
+		}
+
+		.input-div:before {
+			right: 50%;
+		}
+
+		.input-div:after {
+			left: 50%;
+		}
+
+		.input-div.focus:before,
+		.input-div.focus:after {
+			width: 50%;
+		}
+
+		.input-div.focus>div>h5 {
+			top: -5px;
+			font-size: 15px;
+		}
+
+		.input-div.focus>.i>i {
+			color: #38d39f;
+		}
+
+		.input-div>div>input {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			border: none;
+			outline: none;
+			background: none;
+			padding: 0.5rem 0.7rem;
+			font-size: 1.2rem;
+			color: #555;
+			font-family: 'poppins', sans-serif;
+		}
+
+		.input-div.pass {
+			margin-bottom: 4px;
+		}
+
+		a {
+			display: block;
+			text-align: right;
+			text-decoration: none;
+			color: #999;
+			font-size: 0.9rem;
+			transition: .3s;
+		}
+
+		a:hover {
+			color: #38d39f;
+		}
+
+		.btn {
+			display: block;
+			width: 100%;
+			height: 50px;
+			border-radius: 25px;
+			outline: none;
+			border: none;
+			background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+			background-size: 200%;
+			font-size: 1.2rem;
+			color: #fff;
+			font-family: 'Poppins', sans-serif;
+			text-transform: uppercase;
+			margin: 1rem 0;
+			cursor: pointer;
+			transition: .5s;
+		}
+
+		.btn:hover {
+			background-position: right;
+		}
+
+
+		@media screen and (max-width: 1050px) {
+			.container {
+				grid-gap: 5rem;
+			}
+		}
+
+		@media screen and (max-width: 1000px) {
+			form {
+				width: 290px;
+			}
+
+			.login-content h2 {
+				font-size: 2.4rem;
+				margin: 8px 0;
+			}
+
+			.img img {
+				width: 400px;
+			}
+		}
+
+		@media screen and (max-width: 900px) {
+			.container {
+				grid-template-columns: 1fr;
+			}
+
+			.img {
+				display: none;
+			}
+
+			.wave {
+				display: none;
+			}
+
+			.login-content {
+				justify-content: center;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<img class="wave" src="/static/images/wave.png">
+	<div class="container">
+		<div class="img">
+			<img src="/static/images/bg.svg">
+		</div>
+		<div class="login-content">
+			<form action="index.html">
+				<img src="/static/images/avatar.svg">
+				<h2 class="title">Welcome</h2>
+				<div class="input-div one" id="mobile_div">
+					<div class="i">
+						<i class="fas fa-user"></i>
+					</div>
+					<div class="div">
+						<input type="email" class="input" placeholder="Mobile Number" id="mobile_input">
+					</div>
+				</div>
+				<div class="input-div pass" id="otp_div">
+					<div class="i">
+						<i class="fas fa-lock"></i>
+					</div>
+					<div class="div">
+						<input placeholder="Enter OTP" class="input" id="otp_input" required readonly>
+					</div>
+				</div>
+				<a href="signup.html" style="display: inline;">New Account</a>
+				<a href="signup.html" style="display: inline;">/</a>
+				<a id="change_mobile_btn" style="display: inline;">Change Mobile Number</a>
+				<input type="button" class="btn" id="send_otp_btn" value="Send OTP" required>
+				<input type="button" class="btn" style="display: none;" id="verify_otp_btn" value="VERIFY OTP" required>
+				<p id="success_text" style="color: #32be8f;"></p>
+			</form>
+		</div>
+	</div>
+	<script src="jquery-3.7.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		document.getElementById('change_mobile_btn').addEventListener('click', () => {
+			window.location.reload(true)
+		})
+
+
+		function send_otp(mobile_number) {
+			$.ajax({
+				type: 'POST',
+				url: "{{url_for('send_otp')}}",
+				data: { 'mobile_number': mobile_number },
+				success: function (response) {
+					document.getElementById('success_text').innerHTML = 'OTP sent to ' + mobile_number + ' successfully';
+					console.log(response.message)
+				},
+				error: function (error) {
+					alert('We have some technical problem while sending the otp')
+					console.log(error.message)
+				}
+			})
+
+		}
+
+		function search_user_request(mobile_no) {
+			$.ajax({
+				type: 'POST',
+				url: "{{url_for('search_user_in_database')}}",
+				data: { 'mobile_no': mobile_no },
+				success: function (response) {
+					if (response.status == 'success') {
+						console.log(response.message)
+						send_otp(mobile_no)
+					} else {
+						alert(response.message)
+					}
+				},
+				error: function (error) {
+					alert('We have technical issue')
+					console.log(error)
+				}
+			});
+		}
+
+
+		function set_Data_in_file() {
+			var mobile_no = document.getElementById('mobile_input').value
+			$.ajax({
+				type: 'POST',
+				url: "{{url_for('set_data_in_file')}}",
+				data: { 'mobile_no': mobile_no },
+				success: function (response) {
+					if (response.status=='success'){
+						alert('User Sign in successfully')
+						window.location.href='/'
+					}
+				},
+				error: function (error) {
+					alert('We have some technical issue')
+					console.log(error)
+				}
+			})
+		}
+
+		function verify_otp(enter_otp) {
+			$.ajax({
+				type: 'POST',
+				url: "{{url_for('verify_otp')}}",
+				data: { 'enter_otp': enter_otp },
+				success: function (response) {
+					var status = response.status
+					if (status == "correct") {
+						set_Data_in_file()
+					} else {
+						alert('Incorrect OTP')
+					}
+				},
+				error: function (error) {
+					console.log(error.message)
+					alert('We have some error while doing task')
+				}
+			})
+
+		}
+
+
+		document.getElementById('send_otp_btn').addEventListener('click', () => {
+			var mobile_no = document.getElementById('mobile_input').value
+			console.log(mobile_no)
+			if (mobile_no.length != 10) {
+				alert('Invalid Mobile Number')
+			} else {
+				document.getElementById('mobile_input').setAttribute('readonly', true)
+				document.getElementById('otp_input').removeAttribute('readonly')
+				document.getElementById('verify_otp_btn').style.display = 'block'
+				document.getElementById('send_otp_btn').style.display = 'none'
+				search_user_request(mobile_no)
+			}
+		})
+		document.getElementById('verify_otp_btn').addEventListener('click', () => {
+			var otp = document.getElementById('otp_input').value
+			verify_otp(otp)
+			//search_user_request(mobile_no)
+		})
+
+
+
+
+	</script>
+</body>
+
+</html>

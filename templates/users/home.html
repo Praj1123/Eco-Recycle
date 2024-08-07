@@ -1,0 +1,1039 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
+  <style>
+    .color {
+      background-color: #067451;
+    }
+
+    @media (max-width: 767px) {
+      .hide-on-mobile {
+        display: none;
+      }
+
+      .button {
+        display: block;
+      }
+    }
+
+    .flex-nowrap {
+      flex-wrap: nowrap;
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
+  </style>
+</head>
+
+<body>
+  <nav class="navbar color text-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light"><b>EcoRecycle</b></a>
+      <form class="d-flex" role="search">
+        <div class="btn-group">
+          <button class="btn btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <b style="color: white;" id="welcome_text"></b>
+          </button>
+          <ul class="dropdown-menu" style="background-color: #067451">
+            <li> <button class="btn text-light" style="display: none;" type="button" id="sign_in"><b>Sign
+                  in</b></button>
+            </li>
+            <li> <button class="btn text-light" style="display: none;" type="button" id="sign_up"><b>Sign
+                  up</b></button>
+            </li>
+            <li> <button class="btn text-light" style="display: none;" type="button" id="sign_out"><b>Sign
+                  Out</b></button>
+            </li>
+            <li> <button class="btn text-light" type="button" id="sign_in"><b>Profile</b></button>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </nav>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col bg-success m-3 d-flex align-items-center justify-content-center rounded-3" style="height: 200px;">
+        <div>
+          <h1 class="text-light fs-2"><b>Join EcoRecycle for Eco-friendly disposal!</b></h1>
+          <p class="text-light">Minimal changes for environmental sustainability</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <div class="row justify-content-around">
+      <div class="col-10 bg-success d-flex align-items-center justify-content-around rounded-3 ml-4 mr-4"
+        style="height:70px;">
+        <div>
+          <p class="text-light"><b>Search Center</b></p>
+          <p class="text-light hide-on-mobile">Find e-waste disposal</p>
+        </div>
+        <div>
+          <p class="text-light"><b>Schedule Pickup</b></p>
+          <p class="text-light hide-on-mobile">Select convienent</p>
+        </div>
+        <div>
+          <p class="text-light"><b>Choose pickup date</b></p>
+          <p class="text-light hide-on-mobile">Select suitable</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-5 p-5 border-2 rounded-md border-green-600 border-l-8" style>
+    <div class="row">
+      <div class="col-md-3">
+        <img src="/static/images/nearby.png" class="hover:saturate-200 img-fluid">
+        <button style="display: block;margin: 0 auto;color: aliceblue;" id="find_recycle_centre_btn"
+          class="btn transition ease-in-out delay-150 bg-green-700 hover:-translate-y-1 hover:scale-110 hover:bg-green-600 duration-300 ..."
+          data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          Find recycling Center
+        </button>
+      </div>
+      <div class="col-md-3">
+        <img src="/static/images/pickup.png" class="hover:saturate-200 img-fluid">
+        <button style="display: block;margin: 0 auto;color: aliceblue;"
+          class="btn transition ease-in-out delay-150 bg-green-700 hover:-translate-y-1 hover:scale-110 hover:bg-green-600 duration-300 ..."
+          data-bs-toggle="modal" data-bs-target="#exampleModal2" id="schedule_pick_up_btn">
+          Schedule Pickup
+        </button>
+      </div>
+      <div class="col-md-3">
+        <img src="/static/images/seeProfile.png" class="hover:saturate-200 img-fluid">
+        <button style="display: block;margin: 0 auto;color: aliceblue;" data-bs-toggle="modal"
+          data-bs-target="#exampleModal1"
+          class="btn transition ease-in-out delay-150 bg-green-700 hover:-translate-y-1 hover:scale-110 hover:bg-green-600 duration-300 ...">
+          Manage Profile
+        </button>
+      </div>
+      <div class="col-md-3">
+        <img src="/static/images/pickuphistory.png" class="hover:saturate-200 img-fluid">
+        <button style="display: block;margin: 0 auto;color: aliceblue;" id="pick_up_history_btn"
+          class="btn transition ease-in-out delay-150 bg-green-700 hover:-translate-y-1 hover:scale-110 hover:bg-green-600 duration-300 ...">
+          Pick-up History
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-green-600" id="exampleModalLabel"><b>Let us gather you requirement first</b>
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/static/images/loading.gif" id="image_div" width="200px" height="200px"
+            style="display: block;margin: 0 auto;border-radius:5%;display: none;">
+          <p class="mt-3 mb-1 font-semibold">Select brand</p>
+          <select class="form-select form-select-lg mb-3" aria-label="Large select example" id="brand">
+            <!--feching -->
+          </select>
+
+          <div id="category_div">
+            <p class="mt-3 mb-1 font-semibold">Select Category</p>
+            <select class="form-select form-select-lg mb-3" aria-label="Large select example" id="category">
+              <!---feching-->
+            </select>
+          </div>
+          <div id="name_div">
+            <p class="mt-3 mb-1 font-semibold">Select Product Name</p>
+            <select class="form-select form-select-lg mb-3" aria-label="Large select example" id="product_name">
+              <!------feching-->
+            </select>
+          </div>
+          <div id="model_div">
+            <p class="mt-3 mb-1 font-semibold">Select Model</p>
+            <select class="form-select form-select-lg mb-3" aria-label="Large select example" id="model_name">
+              <!------feching-->
+            </select>
+          </div>
+
+          <div id="specification_div">
+            <p class="mt-3 mb-1 font-semibold">Product Specifications</p>
+            <textarea class="form-control" placeholder="Required example textarea" required readonly id="specification"
+              style="border: none;"></textarea>
+          </div>
+
+          <div id="base_price_div">
+            <p class="mt-3 mb-1 font-semibold">Product Base Price</p>
+            <p class="text-green-600">Get Upto <span style="font-size: x-large;"><b id="base_price">---</b></span> Rs
+            </p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-success" id="proceed">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><b class="text-green-700">Lets Gather Some
+              Requirement</b>
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/static/images/loading.gif" style="display: none;margin: 0 auto;border-radius: 10px;" width="200px"
+            height="200px" id="sp_product_image">
+          <p class="mt-3 mb-1 font-semibold">Select brand</p>
+          <select class="form-select form-select-lg mb-3" id="sp_brand" aria-label="Large select example">
+            <!--fetching-->
+          </select>
+          <p class="mt-3 mb-1 font-semibold">Select Category</p>
+          <select class="form-select form-select-lg mb-3" id="sp_category" aria-label="Large select example">
+            <!--fetching-->
+          </select>
+          <p class="mt-3 mb-1 font-semibold">Select Product Name</p>
+          <select class="form-select form-select-lg mb-3" id="sp_product_name" aria-label="Large select example">
+            <!--fetching-->
+          </select>
+          <p class="mt-3 mb-1 font-semibold">Select Product Model</p>
+          <select class="form-select form-select-lg mb-3" id="sp_product_model" aria-label="Large select example">
+            <!--fetching-->
+          </select>
+          <div class="mb-3">
+            <p class="mt-3 mb-1 font-semibold">Product Specifications</p>
+            <textarea class="form-control" style="border: none;" placeholder="Required example textarea"
+              id="sp_product_specification" required readonly></textarea>
+          </div>
+          <div class="mb-3" id="sp_base_price_div">
+            <p class="mt-3 mb-1 font-semibold">Product Base Price</p>
+            <p class="ml-5 text-green-600">Get upto <span class="text-green-600 font-bold" style="font-size: x-large;"
+                id="sp_base_price">---</span> Rs</p>
+          </div>
+
+          <div>
+            <p class="mt-3 mb-1 font-semibold">Check Product Acceptance Criteria</p>
+            <div id="acceptance_criteria_div" class="border-2 rounded-md border-green-600 border-l-8">
+              <!--feching here-->
+            </div>
+          </div>
+
+          <p class="text-green-700 ml-3 mt-3">Best Price offered for your product is <b style="font-size: x-large;"
+              id="best_price">---</b> Rs</p>
+
+          <p class="mt-3 mb-1 font-semibold">Quantity and weight of Item</p>
+          <form class="row g-3 needs-validation m-3" novalidate>
+            <div class="col-md-3">
+              <label for="validationCustom01" class="form-label">Quantity</label>
+              <input type="number" class="form-control" id="quantity" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="validationCustom02" class="form-label">Approx. Weight(kg)</label>
+              <input type="text" class="form-control" id="weight" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <br />
+            <div class="col-md-6">
+              <label for="validationCustom02" class="form-label">Upload single image of your Item</label>
+              <div class="input-group mb-3">
+                <input type="file" class="form-control" id="input_image">
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-success" id="get_price">Get Price</button>
+            <button type="button" class="btn btn-outline-success" id="continue" style="display: none;">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <h1 class="mt-5 fs-2 text-green-700 font-semibold">Top-rated recycling centers</h1>
+    </div>
+  </div>
+  <div class="container mt-3 p-5 border-2 rounded-md border-green-600 border-l-8" style="overflow-x: auto;">
+    <div class="row flex-nowrap">
+      <div class="col" style="position: relative;">
+        <div class="card h-100 mb-3" style="width: 18rem;">
+          <img src="/static/images/recycle.png" class="card-img-top position-relative" alt="...">
+          <div class="position-absolute top-1 left-1">
+            <span class="badge fs-5 m-1 bg-green-600" style="display: inline; float: left;">
+              <h1>4.5</h1>
+            </span>
+          </div>
+          <div class="position-absolute top-3 right-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-star-fill text-warning hover:scale-150" viewBox="0 0 16 16">
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+            </svg>
+          </div>
+          <div class="card-body d-flex flex-column" style="height: 8rem;">
+            <h5 class="card-title font-semibold text-green-700 fs-4">GreenTech Recycle Centre</h5>
+            <p class="card-text overflow-hidden">EcoRecycle</p>
+            <p class="card-text overflow-hidden font-bold">from 120 Rs/ service</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-chevron-right position-absolute bottom-2 right-2 text-green-700 hover:scale-150"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+      <div class="col" style="position: relative;">
+        <div class="card h-100 mb-3" style="width: 18rem;">
+          <img src="/static/images/recycle.png" class="card-img-top position-relative" alt="...">
+          <div class="position-absolute top-1 left-1">
+            <span class="badge fs-5 m-1 bg-green-600" style="display: inline; float: left;">
+              <h1>4.5</h1>
+            </span>
+          </div>
+          <div class="position-absolute top-3 right-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-star-fill text-warning hover:scale-150" viewBox="0 0 16 16">
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+            </svg>
+          </div>
+          <div class="card-body d-flex flex-column" style="height: 8rem;">
+            <h5 class="card-title font-semibold text-green-700 fs-4">GreenTech Recycle Centre</h5>
+            <p class="card-text overflow-hidden">EcoRecycle</p>
+            <p class="card-text overflow-hidden font-bold">from 120 Rs/ service</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-chevron-right position-absolute bottom-2 right-2 text-green-700 hover:scale-150"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+      <div class="col" style="position: relative;">
+        <div class="card h-100 mb-3" style="width: 18rem;">
+          <img src="/static/images/recycle.png" class="card-img-top position-relative" alt="...">
+          <div class="position-absolute top-1 left-1">
+            <span class="badge fs-5 m-1 bg-green-600" style="display: inline; float: left;">
+              <h1>4.5</h1>
+            </span>
+          </div>
+          <div class="position-absolute top-3 right-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-star-fill text-warning hover:scale-150" viewBox="0 0 16 16">
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+            </svg>
+          </div>
+          <div class="card-body d-flex flex-column" style="height: 8rem;">
+            <h5 class="card-title font-semibold text-green-700 fs-4">GreenTech Recycle Centre</h5>
+            <p class="card-text overflow-hidden">EcoRecycle</p>
+            <p class="card-text overflow-hidden font-bold">from 120 Rs/ service</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-chevron-right position-absolute bottom-2 right-2 text-green-700 hover:scale-150"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+      <div class="col" style="position: relative;">
+        <div class="card h-100 mb-3" style="width: 18rem;">
+          <img src="/static/images/recycle.png" class="card-img-top position-relative" alt="...">
+          <div class="position-absolute top-1 left-1">
+            <span class="badge fs-5 m-1 bg-green-600" style="display: inline; float: left;">
+              <h1>4.5</h1>
+            </span>
+          </div>
+          <div class="position-absolute top-3 right-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-star-fill text-warning hover:scale-150" viewBox="0 0 16 16">
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+            </svg>
+          </div>
+          <div class="card-body d-flex flex-column" style="height: 8rem;">
+            <h5 class="card-title font-semibold text-green-700 fs-4">GreenTech Recycle Centre</h5>
+            <p class="card-text overflow-hidden">EcoRecycle</p>
+            <p class="card-text overflow-hidden font-bold">from 120 Rs/ service</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-chevron-right position-absolute bottom-2 right-2 text-green-700 hover:scale-150"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+      <div class="col" style="position: relative;">
+        <div class="card h-100 mb-3" style="width: 18rem;">
+          <img src="/static/images/recycle.png" class="card-img-top position-relative" alt="...">
+          <div class="position-absolute top-1 left-1">
+            <span class="badge fs-5 m-1 bg-green-600" style="display: inline; float: left;">
+              <h1>4.5</h1>
+            </span>
+          </div>
+          <div class="position-absolute top-3 right-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-star-fill text-warning hover:scale-150" viewBox="0 0 16 16">
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+            </svg>
+          </div>
+          <div class="card-body d-flex flex-column" style="height: 8rem;">
+            <h5 class="card-title font-semibold text-green-700 fs-4">GreenTech Recycle Centre</h5>
+            <p class="card-text overflow-hidden">EcoRecycle</p>
+            <p class="card-text overflow-hidden font-bold">from 120 Rs/ service</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-chevron-right position-absolute bottom-2 right-2 text-green-700 hover:scale-150"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-3 p-5" style="overflow-x: auto;">
+    <div class="row">
+      <div class="border-2 p-4 rounded-md border-green-600 border-l-8">
+        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+          class="bi bi-recycle" viewBox="0 0 16 16">
+          <path
+            d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.5.5 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244z" />
+        </svg>
+        <span class="font-semibold">EcoRecycle Welcome you !</span>
+        <span>Receive updates on Eco-friendly practices and our services. Join our Eco-club now!</span>
+        <button class="btn btn-outline-success button" onclick="window.location.href='campaign.html'">Join Eco-club
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="jquery-3.7.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    document.getElementById('schedule_pick_up_btn').addEventListener('click', () => {
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria')}}",
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            document.getElementById('sp_brand').innerHTML = ''
+            document.getElementById('sp_brand').innerHTML += '<option selected value="none">Choose</option>'
+            for (var i = 0; i < data.length; i++) {
+              temp_data = data[i]
+              document.getElementById('sp_brand').innerHTML += `<option value="${temp_data['organization_name']}">${temp_data['organization_name']}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+    })
+
+    document.getElementById('sp_brand').addEventListener('change', () => {
+      var brand = document.getElementById('sp_brand').value
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            console.log(data)
+            document.getElementById('sp_category').innerHTML = ''
+            document.getElementById('sp_category').innerHTML += `<option selected value="none">Choose</option>`
+            var array = new Array()
+            for (key in data) {
+              value = data[key]
+              if (array.includes(value['product_category'])) {
+                continue
+              } else {
+                array.push(value['product_category'])
+              }
+            }
+            for (var i = 0; i < array.length; i++) {
+              document.getElementById('sp_category').innerHTML += `<option value="${array[i]}">${array[i]}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+    document.getElementById('sp_category').addEventListener('change', () => {
+      var category = document.getElementById('sp_category').value
+      var brand = document.getElementById('sp_brand').value
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            document.getElementById('sp_product_name').innerHTML = ''
+            document.getElementById('sp_product_name').innerHTML += `<option selected value="none">Choose</option>`
+            var array = new Array()
+            for (key in data) {
+              value = data[key]
+              if (array.includes(value['product_name'])) {
+                continue
+              } else {
+                array.push(value['product_name'])
+              }
+            }
+            for (var i = 0; i < array.length; i++) {
+              document.getElementById('sp_product_name').innerHTML += `<option value="${array[i]}">${array[i]}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+    document.getElementById('sp_product_name').addEventListener('change', () => {
+      var brand = document.getElementById('sp_brand').value
+      var product_name = document.getElementById('sp_product_name').value
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            document.getElementById('sp_product_model').innerHTML = ''
+            document.getElementById('sp_product_model').innerHTML += `<option selected value="none">Choose</option>`
+            var array = new Array()
+            for (key in data) {
+              value = data[key]
+              if (array.includes(value['product_model'])) {
+                continue
+              } else {
+                array.push(value['product_model'])
+              }
+            }
+            for (var i = 0; i < array.length; i++) {
+              document.getElementById('sp_product_model').innerHTML += `<option value="${array[i]}">${array[i]}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+
+    document.getElementById('sp_product_model').addEventListener('click', () => {
+      var brand = document.getElementById('sp_brand').value
+      var product_model = document.getElementById('sp_product_model').value
+      document.getElementById('sp_product_image').style.display = 'block'
+      document.getElementById('sp_base_price_div').style.display = 'block'
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            for (key in data) {
+              value = data[key]
+              if (product_model == value['product_model']) {
+                document.getElementById('sp_product_specification').value = value['product_specification']
+                console.log(value['product_url'])
+                document.getElementById('sp_product_image').setAttribute('src', value['product_url'])
+                sessionStorage.setItem('base_price', value['product_baseprice'])
+                document.getElementById('sp_base_price').innerHTML = value['product_baseprice']
+                var deducations_array = JSON.parse(value['deductions'])
+                for (var i = 0; i < deducations_array.length; i++) {
+                  data = deducations_array[i]
+                  document.getElementById('acceptance_criteria_div').innerHTML += `
+                  <div class="form-check form-check-inline m-2">
+                <input class="form-check-input checkbox" type="checkbox" name="${data['value']}" id="${data['unit']}"
+                  value="option1">
+                <label class="form-check-label" for="inlineRadio1">${data['key']}</label>
+              </div>`
+
+                  if (data['unit'] == 'Per Unit') {
+                    document.getElementById('acceptance_criteria_div').innerHTML += ` 
+                <div class='m-2' style="display: inline-block" id="scratch_input_field">
+                <input type="text" class="form-control" id="${data['value']}" placeholder="Number of ${data['key']}">
+              </div>`
+                  }
+                  document.getElementById('acceptance_criteria_div').innerHTML += ` 
+              <div class="form-check form-check-inline m-2">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2"
+                  value="option2">
+                <label class="form-check-label" for="inlineRadio2">No such issue exists</label>
+              </div>
+              <br/>`
+                }
+
+              } else {
+                continue
+              }
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+    document.getElementById('get_price').addEventListener('click', () => {
+      var brand = document.getElementById('sp_brand').value
+      var category = document.getElementById('sp_category').value
+      var model_name = document.getElementById('sp_product_model').value
+      var product_name = document.getElementById('sp_product_name').value
+      var product_baseprice = sessionStorage.getItem('base_price')
+      var weight = document.getElementById('weight').value
+      var qualtity = document.getElementById('quantity').value
+      var input_image = document.getElementById('input_image').files[0]
+      if (weight == '') {
+        alert('Approx weight of your product required')
+      } else {
+        if (qualtity == "") {
+          alert('Quantity of your product required')
+        } else {
+          if (input_image == 'undefined' || input_image == 'null' || !input_image) {
+            alert('Image of your product required')
+          } else {
+            var checkbox = document.getElementsByClassName('checkbox')
+            var new_value = 0
+            for (var i = 0; i < checkbox.length; i++) {
+              if (checkbox[i].checked) {
+                var check_box_name = checkbox[i].name ///10
+                console.log(check_box_name)
+                if (checkbox[i].id == 'Per Unit') {
+                  var input_value = document.getElementById(check_box_name).value
+                  console.log(input_value)
+                  new_value = parseFloat(new_value) + parseFloat(input_value * check_box_name)
+                } else {
+                  new_value = parseFloat(new_value) + parseFloat(check_box_name)
+                }
+              }
+            }
+            document.getElementById('best_price').innerHTML = product_baseprice - new_value
+            sessionStorage.setItem('brand', brand)
+            sessionStorage.setItem('category', category)
+            sessionStorage.setItem('model_name', model_name)
+            sessionStorage.setItem('product_name', product_name)
+            sessionStorage.setItem('product_baseprice', product_baseprice)
+            sessionStorage.setItem('weight', weight)
+            sessionStorage.setItem('qualtity', qualtity)
+            sessionStorage.setItem('deduce_amount', product_baseprice - new_value)
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              const base64Image = event.target.result;
+              sessionStorage.setItem('product_image', base64Image);
+            };
+            reader.readAsDataURL(input_image);
+            document.getElementById('continue').style.display = 'inline-block'
+            document.getElementById('get_price').style.display = 'none'
+          }
+        }
+      }
+    })
+
+    document.getElementById('continue').addEventListener('click', () => {
+      window.location.href = '/to_find_recycle_centre_page'
+    })
+  </script>
+  <script>
+
+    check_status()
+    function check_status() {
+      console.log('running')
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('check_status')}}",
+        success: function (response) {
+          if (response.status == 'found') {
+            var data = response.data
+            jsonString = data.replace(/'/g, '"');
+            var obj = JSON.parse(jsonString);
+            name = obj.name
+            name = name.split(' ')[0]
+            console.log(response.message)
+            document.getElementById('welcome_text').innerHTML = 'Hello' + " " + name
+            document.getElementById('sign_in').style.display = 'none'
+            document.getElementById('sign_up').style.display = 'none'
+            document.getElementById('sign_out').style.display = 'block'
+
+          } else {
+            if (response.status == 'not found') {
+              console.log(response.message)
+              document.getElementById('welcome_text').innerHTML = 'Sign in / Sign up'
+              document.getElementById('sign_in').style.display = 'inline-block'
+              document.getElementById('sign_up').style.display = 'inline-block'
+              document.getElementById('sign_out').style.display = 'none'
+
+            } else {
+              if (response.status == 'error') {
+                document.getElementById('welcome_text').innerHTML = 'error'
+                console.log(response.code)
+                alert(response.message)
+              }
+            }
+
+          }
+
+        },
+        error: function (response) {
+
+        }
+      })
+    }
+
+    document.getElementById('sign_in').addEventListener('click', function () {
+      window.location.href = "/signin"
+    });
+
+    document.getElementById('sign_up').addEventListener('click', function () {
+      window.location.href = "/signup"
+    });
+
+    document.getElementById('pick_up_history_btn').addEventListener('click', function () {
+      window.location.href = "/to_pick_up_history_page"
+    });
+
+    document.getElementById('find_recycle_centre_btn').addEventListener('click', () => {
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria')}}",
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            document.getElementById('brand').innerHTML = ''
+            document.getElementById('brand').innerHTML += '<option selected value="none">Choose</option>'
+            for (var i = 0; i < data.length; i++) {
+              temp_data = data[i]
+              document.getElementById('brand').innerHTML += `<option value="${temp_data['organization_name']}">${temp_data['organization_name']}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+    })
+
+    document.getElementById('brand').addEventListener('change', () => {
+      var brand = document.getElementById('brand').value
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            console.log(data)
+            document.getElementById('category').innerHTML = ''
+            document.getElementById('category').innerHTML += `<option selected value="none">Choose</option>`
+            var array = new Array()
+            for (key in data) {
+              value = data[key]
+              if (array.includes(value['product_category'])) {
+                continue
+              } else {
+                array.push(value['product_category'])
+              }
+            }
+            for (var i = 0; i < array.length; i++) {
+              document.getElementById('category').innerHTML += `<option value="${array[i]}">${array[i]}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+
+    document.getElementById('category').addEventListener('change', () => {
+      var category = document.getElementById('category').value
+      var brand = document.getElementById('brand').value
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            document.getElementById('product_name').innerHTML = ''
+            document.getElementById('product_name').innerHTML += `<option selected value="none">Choose</option>`
+            var array = new Array()
+            for (key in data) {
+              value = data[key]
+              if (array.includes(value['product_name'])) {
+                continue
+              } else {
+                array.push(value['product_name'])
+              }
+            }
+            for (var i = 0; i < array.length; i++) {
+              document.getElementById('product_name').innerHTML += `<option value="${array[i]}">${array[i]}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+    document.getElementById('product_name').addEventListener('change', () => {
+      var brand = document.getElementById('brand').value
+      var product_name = document.getElementById('product_name').value
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            document.getElementById('model_name').innerHTML = ''
+            document.getElementById('model_name').innerHTML += `<option selected value="none">Choose</option>`
+            var array = new Array()
+            for (key in data) {
+              value = data[key]
+              if (array.includes(value['product_model'])) {
+                continue
+              } else {
+                array.push(value['product_model'])
+              }
+            }
+            for (var i = 0; i < array.length; i++) {
+              document.getElementById('model_name').innerHTML += `<option value="${array[i]}">${array[i]}</option>`
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+    document.getElementById('model_name').addEventListener('click', () => {
+      var brand = document.getElementById('brand').value
+      var product_model = document.getElementById('model_name').value
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_criteria1')}}",
+        data: { "brand": brand },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            data = data['listed_product']
+            for (key in data) {
+              value = data[key]
+              if (value['product_model'] == product_model) {
+                document.getElementById('specification').value = value['product_specification']
+                document.getElementById('image_div').setAttribute('src', value['product_url'])
+                document.getElementById('base_price').innerHTML = value['product_baseprice']
+              } else {
+                continue
+              }
+            }
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+        },
+        error: function (error) {
+          alert('We encounter some technical issue')
+          console.log(error)
+        }
+      })
+
+    })
+
+
+
+
+
+    function calculate_offered_price(checkedIds, checkedValues, inputValue) {
+      const basePrice = parseFloat(sessionStorage.getItem('base_price'));
+      if (isNaN(basePrice)) {
+        throw new Error('Invalid base price in session storage');
+      }
+
+      if (checkedIds.length !== checkedValues.length) {
+        throw new Error('Checked IDs and values arrays must have the same length');
+      }
+
+      let offeredPrice = basePrice;
+      for (let i = 0; i < checkedIds.length; i++) {
+        offeredPrice -= checkedValues[i] * inputValue;
+      }
+
+      return offeredPrice;
+    }
+
+    function set_data_in_session_storage(brand, category, model_name, product_name, specification, base_price, checkboxe_checked_id_arr, checkboxe_checked_value_arr, checkboxe_checked_input_value_arr, unit, price_offerded) {
+      sessionStorage.setItem('brand', brand)
+      sessionStorage.setItem('category', category)
+      sessionStorage.setItem('product_name', product_name)
+      sessionStorage.setItem('model_name', model_name)
+      sessionStorage.setItem('specification', specification)
+      sessionStorage.setItem('base_price', base_price)
+      sessionStorage.setItem('checkboxe_checked_id_arr', checkboxe_checked_id_arr.join())
+      sessionStorage.setItem('checkboxe_checked_value_arr', checkboxe_checked_value_arr.join())
+      sessionStorage.setItem('checkboxe_checked_input_value_arr', checkboxe_checked_input_value_arr.join())
+      sessionStorage.setItem('unit', unit)
+      sessionStorage.setItem('price_offerded', price_offerded)
+      console.log('done')
+    }
+
+    document.getElementById('proceed').addEventListener('click', () => {
+      var brand = document.getElementById('brand').value
+      sessionStorage.setItem('brand', brand)
+      window.location.href = '/to_schedule_pick_up_page'
+
+    });
+
+    document.getElementById("sign_out").addEventListener('click', () => {
+      $.ajax({
+        type: "POST",
+        url: "{{url_for('sign_out')}}",
+        success: function (response) {
+          if (response.status == 'success') {
+            alert(response.message)
+          } else {
+            alert(response.message)
+            console.log(response.code)
+          }
+        },
+        error: function (error) {
+          alert('we have some technical problem')
+          console.log(error)
+        }
+      })
+    })
+  </script>
+
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>CC Dashboard</title>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style type="text/tailwindcss">
+		@layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: "#0c0c0d",
+						secondary: "#1BCF84",
+						acent1: "#8C4AF2",
+						acent2: "#6F55F6",
+						acent3: "#1BCF84",
+						acent4: "#E25F25",
+						acent5: "#369FFF",
+						gray: "#515A5A",
+						sitebg: "#f8f8f8",
+						bgLight: "rgba(164, 229, 224, 0.45)",
+						softLight: "rgba(255, 255, 255, 0.6)",
+					},
+					dropShadow: {
+						xl: "0px 10px 20px 0px rgba(164, 229, 224, 0.15)",
+					},
+				},
+				container: {
+					center: true,
+					screens: {
+						sm: "100%",
+						md: "100%",
+						lg: "100%",
+						xl: "100%",
+					},
+				},
+				fontSize: {
+					sm: "12px",
+					base: "14px",
+					md: "16px",
+					lg: "17px",
+					xl: "18px",
+					"2xl": "20px",
+					"3xl": "22px",
+					"4xl": "23px",
+				},
+			},
+		};
+	</script>
+</head>
+
+<body>
+
+	<body class="w-full h-auto lg:h-screen bg-sitebg">
+		<div class="antialiased">
+			<nav class="bg-white shadow-sm px-4 py-3 fixed left-0 right-0 top-0 z-50">
+				<div class="flex flex-wrap justify-between items-center">
+					<div class="flex justify-start items-center">
+						<button data-drawer-target="drawer-navigation" class="text-success"
+							data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation"
+							class="p-2 mr-2 text-acent1 rounded-lg cursor-pointer lg:hidden hover:bg-bgLight focus:bg-bgLight focus:ring-2 focus:ring-acent1">
+							<svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+								class="text-success" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd"
+									d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+									clip-rule="evenodd"></path>
+							</svg>
+							<span class="sr-only">Toggle sidebar</span>
+						</button>
+
+					</div>
+
+					<!-- Institute Name -->
+					<div class="hidden lg:inline" style="text-align: left;">
+						<h1 class="text-xl md:text-3xl lg:text-5xl font-medium text-success font-bold"><b>Collection
+								Center Dashboard</b></h1>
+					</div>
+
+					<div class="flex items-center gap-3 lg:order-2">
+						<button type="button" data-dropdown-toggle="notification-dropdown"
+							class="flex items-center justify-center relative w-9 h-9 rounded-xl text-success bg-bgLight hover:bg-succes hover:text-white focus:bg-succes focus:text-white transition-all duration-200">
+							<span class="absolute flex h-5 w-6 -top-2 -right-3">
+								<span
+									class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+								<span
+									class="relative flex items-center justify-center rounded-full h-6 w-6 bg-success text-[9px] text-white">02</span>
+							</span>
+							<i class="text-lg fa-regular fa-bell"></i>
+						</button>
+						<!-- Notification Dropdown menu -->
+						<div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
+							id="notification-dropdown">
+							<h4 class="block py-2 px-4 text-base font-medium text-center text-white bg-success">
+								Notifications</h4>
+							<div>
+								<a href="#" class="flex py-3 px-4 border-b border-gray-300 hover:bg-bgLight">
+									<div class="flex-shrink-0">
+										<img class="w-11 h-11 rounded-full object-cover" src="/images/recycle1.png"
+											alt="Rubel Islam" />
+									</div>
+									<div class="pl-3 w-full">
+										<div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+											New message from
+											<span class="font-semibold text-gray">Rubel Islam</span>: "Create a new
+											class text for class 10."
+										</div>
+										<div class="text-xs font-medium text-primary">a few moments ago</div>
+									</div>
+								</a>
+								<a href="#" class="flex py-3 px-4 hover:bg-bgLight">
+									<div class="flex-shrink-0">
+										<img class="w-11 h-11 rounded-full object-cover" src="/images/recycle1.png"
+											alt="Rubel Islam" />
+									</div>
+									<div class="pl-3 w-full">
+										<div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+											New message from
+											<span class="font-semibold text-gray">Rubel Islam</span>: "Create a new
+											class text for class 10."
+										</div>
+										<div class="text-xs font-medium text-primary">a few moments ago</div>
+									</div>
+								</a>
+							</div>
+							<a href="#"
+								class="block py-2 text-md font-medium text-center text-white bg-acent1 hover:bg-secondary">
+								<div class="inline-flex items-center">
+									<i class="fa-solid fa-eye mr-2 text-lg text-white"></i>
+									View all
+								</div>
+							</a>
+						</div>
+						<!-- End of the Notification -->
+
+						<!-- Setting -->
+						<button type="button" data-dropdown-toggle="apps-dropdown"
+							class="flex items-center justify-center relative w-9 h-9 rounded-xl text-success bg-bgLight hover:bg-succes hover:text-white focus:bg-acent1 focus:text-white transition-all duration-200">
+							<span class="absolute flex h-5 w-6 -top-2 -right-3">
+								<span
+									class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+								<span
+									class="relative flex items-center justify-center rounded-full h-6 w-6 bg-success text-[9px] text-white">02</span>
+							</span>
+							<i class="fa-solid fa-gear text-lg"></i>
+						</button>
+
+						<!-- Setting Dropdown menu -->
+						<div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+							id="apps-dropdown">
+							<h4 class="block py-2 px-4 text-base font-medium text-center text-white bg-success">Setting
+							</h4>
+							<div class="grid grid-cols-3 gap-4 p-4">
+								<a href="#" class="block p-4 text-center rounded-lg hover:bg-bgLight transition-all">
+									<i class="fa-solid fa-graduation-cap text-xl text-success"></i>
+									<div class="text-sm text-gray-900">______</div>
+								</a>
+								<a href="#" class="block p-4 text-center rounded-lg hover:bg-bgLight transition-all">
+									<i class="fa-solid fa-graduation-cap text-xl text-success"></i>
+									<div class="text-sm text-gray-900">______</div>
+								</a>
+								<a href="#" class="block p-4 text-center rounded-lg hover:bg-bgLight transition-all">
+									<i class="fa-solid fa-graduation-cap text-xl text-success"></i>
+									<div class="text-sm text-gray-900">______</div>
+								</a>
+								<a href="#" class="block p-4 text-center rounded-lg hover:bg-bgLight transition-all">
+									<i class="fa-solid fa-graduation-cap text-xl text-success"></i>
+									<div class="text-sm text-gray-900">______</div>
+								</a>
+								<a href="#" class="block p-4 text-center rounded-lg hover:bg-bgLight transition-all">
+									<i class="fa-solid fa-graduation-cap text-xl text-success"></i>
+									<div class="text-sm text-gray-900">______</div>
+								</a>
+								<a href="#" class="block p-4 text-center rounded-lg hover:bg-bgLight transition-all">
+									<i class="fa-solid fa-graduation-cap text-xl text-success"></i>
+									<div class="text-sm text-gray-900">______</div>
+								</a>
+							</div>
+						</div>
+						<!-- End of the Setting -->
+
+						<!-- User Profile -->
+						<button type="button"
+							class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+							id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+							<span class="sr-only">Open user menu</span>
+							<img class="w-8 h-8 rounded-full object-cover"
+								src="https://th.bing.com/th/id/R.e9986e21e104382acc8ce2af3455de66?rik=kdNHgsdrM6Zmxg&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_331373.png&ehk=%2fJxcEqSBghQvtVkUvwu3b7T%2bDoEkcZSxugGHUxOpgxg%3d&risl=&pid=ImgRaw&r=0"
+								alt="user photo" id="profile_image" />
+						</button>
+						<!-- User Profile Dropdown menu -->
+						<div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+							id="dropdown">
+							<ul class="py-1 text-gray-700" aria-labelledby="dropdown">
+								<li>
+									<a href="#" class="block py-2 px-4 text-sm hover:bg-bgLight" id="profile">My
+										profile</a>
+								</li>
+							</ul>
+							<ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
+								<li>
+									<a href="#" class="block py-2 px-4 text-sm hover:bg-bgLight" id="sign_in">Sign
+										in</a>
+								</li>
+							</ul>
+							<ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
+								<li>
+									<a href="#" class="block py-2 px-4 text-sm hover:bg-bgLight" id="sign_up">Sign
+										up</a>
+								</li>
+							</ul>
+							<ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
+								<li>
+									<a href="#" class="block py-2 px-4 text-sm hover:bg-bgLight" id="sign_out">Log
+										out</a>
+								</li>
+							</ul>
+						</div>
+						<!-- End of the user profile -->
+					</div>
+				</div>
+			</nav>
+			<!-- End of the Navbar -->
+
+			<!-- Sidebar -->
+			<aside
+				class="scrollbar fixed top-0 left-0 z-40 w-72 lg:w-56 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 lg:translate-x-0"
+				aria-label="Sidenav" id="drawer-navigation">
+				<div class="overflow-y-auto py-5 px-3 h-full bg-white">
+					<!-- Menu (It's for Lablet and Desktop) -->
+					<ul class="hidden lg:inline space-y-0.5">
+						<li>
+							<a href="#"
+								class="flex items-center p-2 text-base font-medium text-success rounded-lg hover:bg-green-600 group transition duration-75">
+								<span class="ml-3">Dashboard</span>
+							</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center p-2 w-full text-base font-medium text-success rounded-lg transition duration-75 group hover:bg-green-600">
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" onclick="window.location.href='/recent_batches'">Send Request</span>
+							</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center p-2 w-full text-base font-medium text-success rounded-lg transition duration-75 group hover:bg-green-600">
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" id="listed_product">Create Batch</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" type="button"
+								class="flex items-center p-2 w-full text-base font-medium text-success rounded-lg transition duration-75 group hover:bg-green-700">
+								<span class="flex-1 ml-3 text-left whitespace-nowrap" id="manage_batches">Manage Batches</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white z-20">
+					<a href="#" data-tooltip-target="tooltip-settings"
+						class="inline-flex w-9 h-9 justify-center items-center bg-bgLight text-success rounded-xl cursor-pointer hover:text-white hover:bg-succes">
+						<i class="fa-solid fa-gear text-md"></i>
+					</a>
+					<div id="tooltip-settings" role="tooltip"
+						class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-acent1 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip">
+						Settings page
+						<div class="tooltip-arrow" data-popper-arrow></div>
+					</div>
+					<a href="#" data-tooltip-target="tooltip-support"
+						class="inline-flex w-9 h-9 justify-center items-center bg-bgLight text-success rounded-xl cursor-pointer hover:text-white hover:bg-green-700">
+						<i class="fa-solid fa-headset text-md"></i>
+					</a>
+					<div id="tooltip-support" role="tooltip"
+						class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-succes rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip">
+						Support
+						<div class="tooltip-arrow" data-popper-arrow></div>
+					</div>
+				</div>
+			</aside>
+			<!-- End of the Sidebar -->
+
+			<main class="flex flex-col gap-4 md:gap-5 px-4 lg:px-5 lg:ml-56 h-auto pt-20 pb-5">
+				<!--Three cards start-->
+				<div class="col-12 border" style="overflow-x: scroll;height:300px;">
+					<div class="row flex-nowrap">
+						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+							<div class="border-2 border-b-8 border-blue-600 border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64"
+								style="display: flex;justify-content: center;align-items: center;position: relative;">
+								<p class="fs-3 font-bold text-blue-700"
+									style="display: block;position: absolute;top: 5px;left: 10px;">Total Pick-up</p>
+								<p class="fs-1 font-bold text-blue-700" style="display: block;" id="total_pick_up">--
+								</p>
+							</div>
+							<div class="border-2 border-b-8 border-yellow-600 border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64"
+								style="display: flex;justify-content: center;align-items: center;position: relative;">
+								<p class="fs-3 font-bold text-yellow-700"
+									style="display: block;position: absolute;top: 5px;left: 10px;">Pending</p>
+								<p class="fs-1 font-bold text-yellow-700" style="display: block;" id="pending">--</p>
+							</div>
+							<div class="border-2 border-b-8 border-rose-500 border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64"
+								style="display: flex;justify-content: center;align-items: center;position: relative;">
+								<p class="fs-3 font-bold text-rose-500"
+									style="display: block;position: absolute;top: 5px;left: 10px;">Accepted & Ready to
+									Pick-up
+								</p>
+								<p class="fs-1 font-bold text-rose-500" style="display: block;" id='accepted'>--</p>
+							</div>
+							<div class="border-2 border-b-8 border-green-600 border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64"
+								style="display: flex;justify-content: center;align-items: center;position: relative;">
+								<p class="fs-3 font-bold text-green-700"
+									style="display: block;position: absolute;top: 5px;left: 10px;">Received</p>
+								<p class="fs-1 font-bold text-green-700" style="display: block;" id="received">--</p>
+							</div>
+							<div class="border-2 border-b-8 border-fuchsia-600 border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64"
+								style="display: flex;justify-content: center;align-items: center;position: relative;">
+								<p class="fs-3 font-bold text-fuchsia-700"
+									style="display: block;position: absolute;top: 5px;left: 10px;">Amount Released</p>
+								<p class="fs-1 font-bold text-fuchsia-700" style="display: block;" id='amount_release'>
+									--
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Three cards end-->
+				<!--Schedule pick up-->
+				<div class="row align-items-center">
+					<div class="col">
+						<p class="fs-2 text-success"><b>Request's for pick-up</b></p>
+					</div>
+					<div class="col-auto">
+						<div class="dropdown">
+							<button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								Sort by
+							</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#"
+										onclick="sessionStorage.setItem('flag','true');fetch_pick_up_request()">All</a>
+								</li>
+								<li><a class="dropdown-item" href="#"
+										onclick="sessionStorage.setItem('flag','false');sessionStorage.setItem('sort_by','Pending');fetch_pick_up_request()">Pending</a>
+								</li>
+								<li><a class="dropdown-item" href="#"
+										onclick="sessionStorage.setItem('flag','false');sessionStorage.setItem('sort_by','Accepted & Ready to Pick-up');fetch_pick_up_request()">Accepted
+										& Ready to Pick-up</a></li>
+								<li><a class="dropdown-item" href="#"
+										onclick="sessionStorage.setItem('flag','false');sessionStorage.setItem('sort_by','Received');fetch_pick_up_request()">Received</a>
+								</li>
+								<li><a class="dropdown-item" href="#"
+										onclick="sessionStorage.setItem('flag','false');sessionStorage.setItem('sort_by','Amount Released');fetch_pick_up_request()">Amount
+										Released</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="border-2 border-green-600 rounded-lg border-gray-300 dark:border-gray-600 h-100 mb-4"
+					style="max-height: 500px;overflow-y: scroll;" id="fetch_request">
+
+					<!---fetching request-->
+				</div>
+				<!--Schedule pick up-->
+			</main>
+		</div>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.js'></script>
+	<script src="jquery-3.7.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		document.getElementById('sign_in').addEventListener('click', () => {
+			window.location.href = '/c_sign_in'
+		})
+		document.getElementById('sign_up').addEventListener('click', () => {
+			window.location.href = '/c_sign_in'
+		})
+
+
+		document.getElementById('sign_out').addEventListener('click', () => {
+			if (confirm('Sign out leads to sign in again')) {
+				$.ajax({
+					type: 'POST',
+					url: "{{url_for('c_sign_out')}}",
+					success: function (response) {
+						if (response.status == 'success') {
+							console.log(response.message)
+							window.location.reload(true)
+						} else {
+							alert('Something went wrong')
+						}
+					},
+					error: function (error) {
+						alert('We have some techincal issue')
+						console.log(error)
+					}
+				})
+			}
+		})
+
+		document.getElementById('profile').addEventListener('click', () => {
+			window.location.href = '/c_profile'
+		})
+
+		document.getElementById('listed_product').addEventListener('click',()=>{
+			window.location.href='/c_producer_listed_item_page'
+		})
+
+		document.getElementById('manage_batches').addEventListener('click',()=>{
+			window.location.href='/manage_batches'
+		})
+
+
+		c_get_profie_url()
+		function c_get_profie_url() {
+			$.ajax({
+				type: 'POST',
+				url: "{{url_for('c_get_profile')}}",
+				success: function (response) {
+					if (response.status == 'success') {
+						data = response.data
+						data = JSON.parse(data)
+						document.getElementById('profile_image').setAttribute('src', data.profile_url)
+					} else {
+						if (response.status == 'error') {
+							console.log('Profile not found')
+						} else {
+							console.log('Something went wrong')
+						}
+					}
+
+				},
+				error: function (error) {
+					console.log(error)
+				}
+			})
+		}
+
+
+		function change_status(id) {
+			$.ajax({
+				type: 'POST',
+				url: "{{url_for('change_status')}}",
+				data: { 'id': id, 'status': sessionStorage.getItem('btn_status') },
+				success: function (response) {
+					if (response.status == 'success') {
+						console.log(response.message)
+						fetch_pick_up_request()
+					} else {
+						if (response.message == 'error') {
+							alert(response.message)
+							console.log(response.message)
+						} else {
+							alert('Something went wrong')
+						}
+					}
+
+				},
+				error: function (error) {
+					console.log(e)
+					alert('We encounter some technical problem')
+				}
+
+			})
+		}
+
+
+		fetch_pick_up_request()
+		sessionStorage.setItem('flag', 'true')
+		sessionStorage.getItem('sort_by', 'false')
+		var total_pick_up = 0
+		var pending = 0
+		var accepted = 0
+		var amount_release = 0
+		var received = 0
+		function fetch_pick_up_request() {
+			$.ajax({
+				type: 'POST',
+				url: "{{url_for('fetch_pick_up_request')}}",
+				success: function (response) {
+					if (response.status == 'success') {
+						data1 = response.data
+						total_pick_up = 0
+						pending = 0
+						accepted = 0
+						amount_release = 0
+						received = 0
+						document.getElementById('fetch_request').innerHTML = ''
+						document.getElementById('total_pick_up').innerHTML = ''
+						document.getElementById('pending').innerHTML = ''
+						document.getElementById('accepted').innerHTML = ''
+						document.getElementById('amount_release').innerHTML = ''
+						document.getElementById('received').innerHTML = ''
+						for (key in data1) {
+							data = data1[key]
+							if (data['status'] == 'Pending') {
+								pending = pending + 1
+								total_pick_up = total_pick_up + 1
+							} else {
+								if (data['status'] == 'Accepted & Ready to Pick-up') {
+									accepted = accepted + 1
+									total_pick_up = total_pick_up + 1
+
+								} else {
+									if (data['status'] == 'Received') {
+										received = received + 1
+										total_pick_up = total_pick_up + 1
+									} else {
+										if (data['status'] == 'Amount Released') {
+											amount_release = amount_release + 1
+											total_pick_up = total_pick_up + 1
+										}
+									}
+								}
+							}
+							if (sessionStorage.getItem('flag') == 'true' || sessionStorage.getItem('sort_by') == data['status']) {
+								document.getElementById('fetch_request').innerHTML += `
+							<div class="card m-3 relative">
+						<div class="card-body" style="line-height: 1.25;">
+							<span
+								class="badge bg-success text-light border border-success rounded-1 absolute top-0 right-0 mr-3 mt-3">${data.status}</span>
+							<p class="card-title fs-4 text-green-700"><b>${data['firstName']} ${data['lastName']}</b></p>
+							<p class="card-text">OrderId: ${key}</p>
+							<p class="card-text">Request-up Date: ${data['request_date']}</p>
+							<p class="card-text">Address: ${data['address']}, ${data['city']}, ${data['state']} ${data['zip']}</p>
+
+							<div class="dropdown">
+								<button class="dropdown-toggle font-bold text-green-700" type="button"
+									data-bs-toggle="dropdown" aria-expanded="false">
+									See more
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#">Category: ${data['category']}</a></li>
+									<li><a class="dropdown-item" href="#">Brand: ${data['brand']}</a></li>
+									<li><a class="dropdown-item" href="#">Quantity: ${data['qualtity']} Unit</a></li>
+									<li><a class="dropdown-item" href="#">Weight: ${data['weight']} kg</a></li>
+									<li><a class="dropdown-item" href="#">Base Price: ${data['product_baseprice']} Rs</a></li>
+									<li><a class="dropdown-item" href="#">Offerded Price: ${data['deduce_amount']} Rs</a></li>
+									<li><a class="dropdown-item text-green-600" href="#">Charges+GST: ${data['total_charges']}Rs</a></li>
+								</ul>
+							</div>
+							<div class="dropdown absolute bottom-3 right-2">
+								<button class="btn btn-outline-success" type="button" data-bs-toggle="dropdown"
+									aria-expanded="false">
+									Change Status
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#" onclick="sessionStorage.setItem('btn_status','Pending');change_status('${key}')">Pending</a></li>
+									<li><a class="dropdown-item" href="#" onclick="sessionStorage.setItem('btn_status','Accepted & Ready to Pick-up');change_status('${key}')">Accepted & Ready to Pick-up</a></li>
+									<li><a class="dropdown-item" href="#" onclick="sessionStorage.setItem('btn_status','Received');change_status('${key}')">Received</a></li>
+									<li><a class="dropdown-item" href="#" onclick="sessionStorage.setItem('btn_status','Amount Released');change_status('${key}')">Amount Released</a></li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+							`
+								document.getElementById('total_pick_up').innerHTML = total_pick_up
+								document.getElementById('pending').innerHTML = pending
+								document.getElementById('accepted').innerHTML = accepted
+								document.getElementById('amount_release').innerHTML = amount_release
+								document.getElementById('received').innerHTML = received
+							}
+						}
+					} else {
+						if (response.status == 'error') {
+							console.log(response.message)
+						} else {
+							alert('Something went wrong')
+						}
+					}
+				},
+				error: function (error) {
+					console.log(error)
+				}
+			})
+		}
+
+	</script>
+
+</html>

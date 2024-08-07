@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Batches</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .color {
+            background-color: #067451;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .pending {
+            background-color: #ff9800;
+        }
+
+        .completed {
+            background-color: #4caf50;
+        }
+
+        .cancelled {
+            background-color: #f44336;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                width: 100%;
+            }
+
+            table {
+                box-shadow: none;
+            }
+        }
+
+        .hide:hover {
+            opacity: 100%;
+        }
+
+        #add_to_batch:hover {
+            width: 30px;
+            height: 30px;
+            color: #f44336
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar color text-light">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light"><b>EcoRecycle</b></a>
+        </div>
+    </nav>
+    <div class="container text-center mt-5">
+        <div class="row">
+            <div class="col-sm-12 border-2 rounded-2 p-3" style="height:700px;overflow-y: auto;">
+                <h1 class="mb-4" style="font-weight: 700;color:#067451;text-align:left;font-size:x-large">Recently
+                    Created Batches</h1>
+                <div class="list-group" id="fetch_batches">
+                    <!--fetching batches-->
+                </div>
+            </div>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel"><b class="text-success"
+                            style="font-size: larger;">Items
+                            to Add</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body text-left">
+                    <small>Search by Brand, Category, Product Name, Model Name</small>
+                    <form class="d-flex mb-3 mt-1" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <p class="mb-2">Searched for <b class="text-success">Vivot ss</b></p>
+                    <div id="fetch_items">
+                        <!---fetch items-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function getTodaysDate() {
+            const today = new Date();
+            const todaysDate = today.toISOString().split('T')[0];
+            return todaysDate;
+        }
+
+        get_batches()
+        function get_batches() {
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_get_batches')}}",
+                success: function (response) {
+                    if (response.status === 'success') {
+                        var data1 = JSON.parse(response.data)
+                        list_of_added_items = []
+                        for (key in data1) {
+                            var data = data1[key]
+                            var items = data['items']
+                            var batch_count = 0
+                            for (item in items) {
+                                list_of_added_items.push(item)
+                                batch_count = batch_count = 1
+                            }
+                            document.getElementById('fetch_batches').innerHTML += `
+              <a href="#" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><b>${data['batch_name']}</b></h5>
+                <small>${data['date']}</small>
+              </div>
+              <p class="mb-1" style="text-align: left;white-space: nowrap;overflow:auto;font-size:small">Description: ${data['description']}</p>
+              <small style="text-align: left;float:inline-start"><span>UnqiueId: ${data['unique_id']}</span></small>
+              <br>
+              <span class="badge rounded-pill text-bg-warning" style="float:inline-start">Batch loaded with ${batch_count}
+                Items</span>
+              </span>
+              <button class="btn btn-outline-success m-1" onclick="sessionStorage.setItem('batchId','${key}');get_items_for_batch()" type="button" style="float: inline-end;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Add Items</button>
+              <button class="btn btn-outline-warning m-1" id="seeDetailsButton" type="button" style="float: inline-end" data-bs-toggle="modal" data-bs-target="#${key}">See Details</button>
+              <button type="button" style='float:right' class="btn btn-outline-info m-1" data-bs-toggle="modal" data-bs-target="#${key}11">Send Request</button>
+            </a>
+            <div class="modal fade" id="${key}" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <p class='text-warning'>More Details</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card text-left p-3">
+                      <p><b>${data['brand']}</b></p>
+                      <p><b>Category:</b style="overflow-x: auto; white-space: nowrap">${data['product_category']}</p>
+                      <p><b>Product Name:</b> ${data['product_name']}</p>
+                      <p><b>Model Name:</b> ${data['product_model']}</p>
+                      <p><b>Specification:</b> ${data['product_specification']}</p>
+                      <p><b>Product Base Price:</b> ${data['product_baseprice']}</p>
+                      <p><b>Producer ID:</b> ${data['producer_id']}</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="${key}11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5 text-info" id="exampleModalLabel">Sending with this Details</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style='text-align:left'>
+                        <div class="card text-left p-3">
+                            <p><b>${data['brand']}</b></p>
+                            <p><b>Category:</b style="overflow-x: auto; white-space: nowrap">${data['product_category']}</p>
+                            <p><b>Product Name:</b> ${data['product_name']}</p>
+                            <p><b>Model Name:</b> ${data['product_model']}</p>
+                            <p><b>Specification:</b> ${data['product_specification']}</p>
+                            <p><b>Product Base Price:</b> ${data['product_baseprice']}</p>
+                            <p><b>Producer ID:</b> ${data['producer_id']}</p>
+                          </div>
+                        <div class="col m-1">
+                            <label for="validationCustom01" class="form-label">Batch Name</label>
+                            <input type="text" class="form-control" value='${data['batch_name']}' id="batch_name" required readonly>
+                        </div>
+                        <div class="col m-1">
+                            <label for="validationCustom01" class="form-label">BatchId</label>
+                            <input type="text" class="form-control" value='${data['unique_id']}' id="batch_id" required readonly>
+                        </div>
+                        <div class="col m-1">
+                            <label for="validationCustom01" class="form-label">Items Loaded</label>
+                            <input type="text" class="form-control" value='${batch_count}' id="batch_count" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-info" onclick="send_request('${data['brand']}','${data['product_category']}','${data['product_name']}','${data['product_model']}','${data['product_specification']}',
+                      '${data['product_baseprice']}','${data['batch_name']}','${data['unique_id']}','${batch_count}', '${data['producer_id']}')">Send Request</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              `
+                        }
+                        sessionStorage.setItem('list_of_added_items', JSON.stringify(list_of_added_items))
+                    } else {
+                        if (response.status == 'error') {
+                            document.getElementById('fetch_batches').innerHTML = `<b style="text-align:center">${response.message}</b>`
+                            console.log(response.message)
+                        } else {
+                            alert('Something went wrong')
+                        }
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert('An error occurred while processing the request');
+                },
+            });
+        }
+
+        function item_added(id, user_id) {
+            const batch_id = sessionStorage.getItem('batchId')
+            const item_id = id
+            var user_id = user_id
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_insert_item_to_batch')}}",
+                data: { batch_id: batch_id, item_id: item_id, user_id: user_id },
+                success: function (response) {
+                    if (response.status == 'success') {
+                        alert(response.message)
+                    } else {
+                        if (response.status == 'error') {
+                            alert(response.message)
+                        } else {
+                            alert('Something went wrong')
+                            console.log(response.message)
+                        }
+                    }
+
+                },
+                error: function (response) {
+                    alert('We encounter some technical problem')
+                    console.log(response)
+                }
+            })
+
+        }
+
+
+
+        function get_items_for_batch() {
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_get_items_for_batch')}}",
+                success: function (response) {
+                    if (response.status == 'success') {
+                        var list_of_added_items = JSON.parse(sessionStorage.getItem('list_of_added_items'))
+                        var data1 = JSON.parse(response.data)
+                        var flag = true
+                        document.getElementById('fetch_items').innerHTML =''
+                        for (key in data1) {
+                            data = data1[key]
+                            if (data['status'] == 'Amount Released') {
+                                var user_id = data['user_id']
+                                flag = false
+                                var text = ''
+                                if (list_of_added_items.includes(key)) {
+                                    text = `<button type="button" onclick='item_added("${key}","${user_id}")' class="btn btn-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;position: absolute; top: 8px; right: 10px;" disabled>
+                        Added</button>`
+                                } else {
+                                    text = `<button type="button" onclick='item_added("${key}","${user_id}")' class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;position: absolute; top: 8px; right: 10px;">
+                          Add</button>`
+                                }
+                                document.getElementById('fetch_items').innerHTML += `
+              <div class="col-sm">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center">
+                      <img src="${data['product_image']}" class="img-fluid rounded-start border align-self-center" style="height: 100%;" alt="Not Found">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                       ${text}
+                        <h5 class="card-title" style=" white-space: nowrap;overflow-x:auto;line-height:normal">${data['brand']}</h5>
+                        <p class="card-text"
+                          style=" white-space: nowrap;overflow-x:auto;line-height:normal;font-size:small">
+                          Category: ${data['category']}</p>
+                        <p class="card-text"
+                          style=" white-space: nowrap;overflow-x:auto;line-height:normal;font-size:small">
+                          Product Name: ${data['product_name']}</p>
+                        <p class="card-text"
+                          style=" white-space: nowrap;overflow-x:auto;line-height:normal;font-size:small">
+                          Model: ${data['model_name']}</p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              `
+                            }
+                        }
+                        if (flag) {
+                            document.getElementById('fetch_items').innerHTML = 'No Item found'
+                        }
+                    } else {
+                        if (response.status == 'error') {
+                            console.log(response.message)
+                        } else {
+                            alert('Something went wrong')
+                        }
+                    }
+
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert('We encounter some technical problem')
+                }
+            })
+        }
+
+
+        function send_request(brand, product_category, product_name, product_model, product_specification,
+            product_baseprice, batch_name, unique_id, batch_count,producer_id) {
+            var data = JSON.stringify({'brand': brand, "product_category": product_category, "product_name": product_name, "product_model": product_model, "product_specification": product_specification, "product_baseprice": product_baseprice, "batch_name": batch_name, "unique_id": unique_id, "batch_count": batch_count, 'requested_date': getTodaysDate(),'status':'Pending',"producer_id":producer_id})
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_send_request')}}",
+                data:{'data':data},
+                success: function (response) {
+                    if(response.status=='success'){
+                        alert('Request send successfully')
+                    }else{
+                        if(response.status=='error'){
+                            console.log(response.message)
+                        }else{
+                            alert('Something went wrong')
+                        }
+                    }
+
+                },
+                error: function (error) {
+                       alert('We encounter some technical issue')
+                       console.log(error)
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>

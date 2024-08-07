@@ -1,0 +1,466 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+    .color {
+      background-color: #067451;
+    }
+    /* Custom CSS for gradient border */
+.border-gradient {
+    border: 4px solid transparent; /* Set initial border */
+    border-image: linear-gradient(to right, #148a45, #ffffff); /* Define gradient */
+    border-image-slice: 1; /* Ensure full coverage of the border */
+}
+
+    @media (max-width: 767px) {
+      .manage_width{
+        width: 100%;
+        height: 250px;
+      }
+      .manage_margin{
+      margin-left: 5px;
+      margin-right: 5px;
+      text-align: left;
+    }
+    .manage_margin_card2{
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    }
+    
+  </style>
+</head>
+
+<body>
+  <nav class="navbar color text-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light"><b>EcoRecycle</b></a>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="row" id="header">
+      <!---header will fetch here-->
+    </div>
+  </div>
+
+  <div class="container text-center mt-5">
+    <div class="row bg-success rounded-3 p-3 manage_margin">
+      <div class="col-sm"> <svg xmlns="http://www.w3.org/2000/svg" style="display: inline;color: white;" width="26"
+          height="26" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+          <path
+            d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
+        </svg>
+        <p style="display: inline;" class="font-semibold text-light fs-5 pl-2">4.5 star rating</p>
+      </div>
+      <div class="col-sm font-semibold text-light fs-5">
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: inline;" class="text" width="26" height="26"
+          fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+          <path
+            d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+        </svg>
+        <p style="display: inline;" class="font-semibold text-light fs-5 pl-2">Fixed pick-up charges</p>
+      </div>
+      <div class="col-sm font-semibold text-light fs-5">
+        <svg xmlns="http://www.w3.org/2000/svg" style="display:inline;" width="26" height="26" fill="currentColor"
+          class="bi bi-person-workspace" viewBox="0 0 16 16">
+          <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+          <path
+            d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z" />
+        </svg>
+        <p style="display: inline;" class="font-semibold text-light fs-5 pl-2"> working with 100+ companies
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center mt-5">
+    <header class="text-center mb-5">
+      <h1 class="text-green-600 fs-2"><b>Welcome to Our Recycling Center</b></h1>
+      <p class="lead font-semibold">Transforming waste into resources for a sustainable future</p>
+    </header>
+    <div class="row border-gradient border-solid border-4 p-3 manage_margin">
+      <div class="col-sm border-2 rounded-3 border-green-600 m-2 p-2 hover:skew-y-6">
+        <section>
+          <h2 class="font-semibold text-green-600">Our Mission:</h2>
+          <p style="text-align: justify;">At our recycling center, we are committed to promoting environmental
+            sustainability by providing
+            convenient and efficient recycling solutions. We aim to reduce waste, conserve natural resources, and
+            minimize pollution by encouraging responsible recycling practices among our community members.</p>
+        </section>
+      </div>
+      <div class="col-sm border-2 rounded-3 border-green-600 m-2 p-2 hover:skew-y-6">
+        <section>
+          <h2 class="font-semibold text-green-600">Services We Offer</h2>
+          <ul style="text-align: justify;">
+            <li>Pick up of your e-waste at your door step</li>
+            <li>E-waste recycling for electronics such as computers, cell phones, and household appliances</li>
+            <li>Composting services for organic waste</li>
+            <li>Education and outreach programs to raise awareness about the importance of recycling</li>
+            <li>Consultation and assistance for businesses and organizations seeking to improve their recycling
+              practices</li>
+          </ul>
+        </section>
+      </div>
+      <div class="col-sm border-2 rounded-3 border-green-600 m-2 p-2 hover:skew-y-6">
+        <section>
+          <h2 class="font-semibold text-green-600">Why Recycle With Us?</h2>
+          <p>Choosing our recycling center means choosing a partner in sustainability. We offer:</p>
+          <ol>
+            <li>Convenient drop-off locations and flexible hours of operation</li>
+            <li>State-of-the-art recycling facilities with advanced sorting and processing capabilities</li>
+            <li>Expertise in handling a wide range of recyclable materials</li>
+            <li>Commitment to environmental responsibility and compliance with regulatory standards</li>
+            <li>Community engagement and support for local environmental initiatives</li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="col m-3 border-3 rounded-2 border-green-600 manage_margin_card2 p-4" style="text-align: justify;">
+    <p>Contact us today to learn more about our recycling services and how you can get
+      involved in creating a cleaner, greener future!
+    <p class="font-semibold">At Tollfree No. +91<span id="contact_number"></span></p>
+    </p>
+    <p style="text-align: center;" class="mb-3">OR</p>
+    <button type="button" class="btn btn-outline-success" style="display: block;margin: 0 auto;" data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop" id="schedule">
+      Schedule pick-up
+    </button>
+  </div>
+  <!--Modal for searching-->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-green-600" id="staticBackdropLabel"><b>Verify Details</b></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="card mb-3" id="temp_card">
+            <!---fetching temp card here-->
+          </div>
+          <form class="row g-3">
+            <h1 class="modal-title fs-5 text-green-600" id="staticBackdropLabel"><b>Pick-up Requirement</b></h1>
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName">
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName">
+            </div>
+            <div class="col-6">
+              <label for="inputAddress" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+            </div>
+            <div class="col-6">
+              <label for="inputAddress2" class="form-label">Mobile Number</label>
+              <input type="text" class="form-control" id="number">
+            </div>
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">City</label>
+              <input type="text" class="form-control" id="city">
+            </div>
+            <div class="col-md-4">
+              <label for="inputState" class="form-label">State</label>
+              <select class="form-select" id="state">
+                <option selected value="none">Choose...</option>
+                <option value="Maharashtra">Maharashtra</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="inputZip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="zip">
+            </div>
+            <p style="font-weight: 600;">We will charge <span id="charges" style="font-size: x-large;">---</span> Rs for
+              this pick-up</p>
+            <p class="text-warning" style="line-height: 0%;">(Note: If weight is less than 1000gm same charges will be
+              applicable per unit of
+              product) </p>
+          </form>
+          <div class="modal-footer mt-3">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-success" onclick="display(event)">Proceed to Pay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="jquery-3.7.1.min.js"></script>
+  <script src="server.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    get_cc_data()
+    function get_cc_data() {
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('get_cc_data')}}",
+        data: { 'id': sessionStorage.getItem('cc_id') },
+        success: function (response) {
+          if (response.status == 'success') {
+            data = JSON.parse(response.data)
+            console.log(data)
+            document.getElementById('header').innerHTML = `
+            <div class="col-sm-8">
+        <h1 class="text-green-700 fs-1" style="text-align: left;"><b>${data['organization_name']}</b></h1>
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-green-600" style="display: inline;" width="26" height="26"
+          fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+        </svg>
+        <p style="display: inline;">0.3 km from your current location</p>
+        <br/>
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-green-600 mt-2" style="display: inline;" width="26" height="26" fill="currentColor" class="bi bi-house-add-fill" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 1 1-1 0v-1h-1a.5.5 0 1 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
+  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+  <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+</svg>
+        <p style="display: inline;">${data['address']}</p>
+        <br/>
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-green-600 mt-2" style="display: inline;" width="26" height="26" fill="currentColor" class="bi bi-alarm-fill" viewBox="0 0 16 16">
+  <path d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5m2.5 5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.04 8.04 0 0 0 .86 5.387M11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.04 8.04 0 0 0-3.527-3.527"/>
+</svg>
+<p style="display: inline;">${data['operating_hours']}</p>
+
+      </div>
+      <div class="col-sm-4 mt-2" style="float: right;text-align:right"> <img src="${data['profile_url']}" style='text-align: right;max-height:400px'
+    class="img-fluid rounded-tl-lg p-3 border-8 border-r-green-600 border-l-white border-t-white border-r-green-600 border-b-green-600 "
+    alt="...">
+</div>
+            `
+            document.getElementById('contact_number').innerHTML = data['contact_number']
+            sessionStorage.setItem('charges', data['charges'])
+
+          } else {
+            if (response.status == 'error') {
+              console.log(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+
+        },
+        error: function (error) {
+          alert('We encountered some technical problem')
+          console.log(e)
+
+        }
+      })
+    }
+    function fetch_temp_card() {
+      var brand = sessionStorage.getItem('brand')
+      var category = sessionStorage.getItem('category')
+      var product_image = sessionStorage.getItem('product_image')
+      var qualtity = sessionStorage.getItem('qualtity')
+      var weight = sessionStorage.getItem('weight')
+      var product_name = sessionStorage.getItem('product_name')
+      var model_name = sessionStorage.getItem('model_name')
+      var base_price = sessionStorage.getItem('base_price')
+      var deduce_amount = sessionStorage.getItem('deduce_amount')
+      document.getElementById("temp_card").innerHTML = `
+      <div class="row g-0">
+              <div class="col-md-4">
+                <img src="${product_image}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title text-success"><b>${brand}</b></h5>
+                  <p class="card-text">${category}</p>
+                  <p style='display-inline'><b>Quantity:</b> ${qualtity} Unit</p>                  
+                  <p style='display-inline'><b>Weight:</b> ${qualtity} kg</p>
+                  <div class="dropdown mt-3">
+  <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Product Details
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Product Name: ${product_name}</a></li>
+    <li><a class="dropdown-item" href="#">Model: ${model_name}</a></li>
+    <li><a class="dropdown-item" href="#">Base Price: ${base_price} Rs</a></li>
+    <li><a class="dropdown-item" href="#">Offerded Price: ${deduce_amount} Rs</a></li>
+
+  </ul>
+</div>
+                </div>
+              </div>
+            </div>
+      `
+      if (sessionStorage.getItem('weight') < 1000) {
+        document.getElementById('charges').innerHTML = sessionStorage.getItem('charges') * qualtity
+        sessionStorage.setItem('total_charges', sessionStorage.getItem('charges') * qualtity)
+      } else {
+        document.getElementById('charges').innerHTML = sessionStorage.getItem('charges') * weight
+        sessionStorage.setItem('total_charges', sessionStorage.getItem('charges') * weight)
+      }
+
+    }
+
+    document.getElementById('schedule').addEventListener('click', () => {
+      fetch_temp_card()
+    })
+
+    function set_pick_up_data() {
+      let currentDate = new Date();
+      let day = currentDate.getDate();
+      let month = currentDate.getMonth() + 1;
+      let year = currentDate.getFullYear();
+      let formattedDate = day + "/" + month + "/" + year;
+      console.log(formattedDate); 
+      var object = {
+        firstName: sessionStorage.getItem('firstName'),
+        lastName: sessionStorage.getItem('lastName'),
+        mobile_number: sessionStorage.getItem('number'),
+        qualtity: sessionStorage.getItem('qualtity'),
+        address: sessionStorage.getItem('address'),
+        zip: sessionStorage.getItem('zip'),
+        product_name: sessionStorage.getItem('product_name'),
+        total_charges: sessionStorage.getItem('total_charges'),
+        city: sessionStorage.getItem('city'),
+        product_baseprice: sessionStorage.getItem('product_baseprice'),
+        model_name: sessionStorage.getItem('model_name'),
+        category: sessionStorage.getItem('category'),
+        state: sessionStorage.getItem('state'),
+        weight: sessionStorage.getItem('weight'),
+        deduce_amount: sessionStorage.getItem('deduce_amount'),
+        brand: sessionStorage.getItem('brand'),
+        charges: sessionStorage.getItem('charges'),
+        cc_id: sessionStorage.getItem('cc_id'),
+        request_date :formattedDate,
+        status:'Pending',
+        product_image: sessionStorage.getItem('product_image'),
+      }
+      console.log(object)
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('set_pick_up_data')}}",
+        data: { 'data': JSON.stringify(object)},
+        success: function (response) {
+          if (response.status == 'success') {
+            alert(response.message)
+            window.location.href = "/to_pick_up_history_page"
+          } else {
+            if (response.state == 'error') {
+              alert(response.message)
+            } else {
+              alert('Something went wrong')
+            }
+          }
+
+        },
+        error: function (error) {
+          alert('We encounter some technical problem')
+          console.log(error)
+
+        }
+      })
+    }
+
+  </script>
+  <script>
+
+    $(document).ready(function () {
+      var settings = {
+        "url": "/create/orderId",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "amount": sessionStorage.getItem('total_charges') * 100,
+        }),
+      };
+
+      $.ajax(settings).done(function (response) {
+        $("button").show();
+        display(response.orderId, event);
+      });
+    });
+
+    function display(event) {
+      event.preventDefault();
+      var firstName = document.getElementById("firstName").value
+      var lastName = document.getElementById("lastName").value
+      var number = document.getElementById("number").value
+      var address = document.getElementById("address").value
+      var city = document.getElementById("city").value
+      var state = document.getElementById("state").value
+      var zip = document.getElementById("zip").value
+      sessionStorage.setItem('firstName', firstName)
+      sessionStorage.setItem('lastName', lastName)
+      sessionStorage.setItem('number', number)
+      sessionStorage.setItem('address', address)
+      sessionStorage.setItem('city', city)
+      sessionStorage.setItem('state', state)
+      sessionStorage.setItem('zip', zip)
+      var options = {
+        "key": "rzp_test_Rtep49rO7VTb44", // Enter the Key ID generated from the Dashboard
+        "amount": sessionStorage.getItem('total_charges') * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": 'EcoRecycle',
+        "description": "Test Transaction",
+        "image": "BrandLogo.png",
+        "handler": function (response) {
+          console.log(response.razorpay_payment_id);
+          console.log(response.razorpay_order_id);
+          console.log(response.razorpay_signature);
+          set_pick_up_data()
+          // alert('Payment Successfull')
+          var settings = {
+            "url": "/api/payment/verify",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "data": JSON.stringify(response), // Send response directly as JSON string
+          };
+
+          $.ajax(settings).done(function (response) {
+            alert(JSON.stringify(response));
+            if (response.signatureIsValid === "true") {
+              alert("Payment successful!");
+            } else {
+              alert("Payment failed.");
+            }
+          });
+        },
+        "theme": {
+          "color": "#2d9c4e"
+        }
+      };
+
+      var rzp1 = new Razorpay(options);
+      rzp1.on('payment.failed', function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+      });
+      rzp1.open();
+    }
+  </script>
+</body>
+
+</html>

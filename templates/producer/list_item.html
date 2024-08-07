@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Product Listing</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer utilities {
+  .content-auto {
+    content-visibility: auto;
+  }
+}
+.color {
+            background-color: #067451;
+        }
+</style>
+</head>
+
+<body>
+    <nav class="navbar color text-light">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light"><b>EcoRecycle</b></a>
+        </div>
+    </nav>
+    <h1 class="m-5 text-success" style="font-size: x-large;"><b>List Product that you wants to recover</b></h1>
+    <div class="container mt-5">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-sm-8">
+                    <form style="text-align: left;">
+                        <div class="form-group m-2">
+                            <label>Category of Product</label>
+                            <select class="form-select" aria-label="Default select example" id="product_category">
+                                <option value="none">Choose</option>
+                                <option
+                                    value="computer (Desktop computers, laptops, servers, and associated peripherals) (e.g., keyboards, mice, monitors)">
+                                    Computers - Desktop computers, laptops, servers, and associated peripherals</option>
+                                <option
+                                    value="mobile-devices (Smartphones, tablets, and accessories such as chargers and cables)">
+                                    Mobile Devices - Smartphones, tablets, and accessories</option>
+                                <option
+                                    value="consumer-electronics (Televisions, DVD players, VCRs, digital cameras, camcorders, audio equipment (e.g., speakers, headphones), and gaming consoles)">
+                                    Consumer Electronics - TVs, DVD players, cameras, audio equipment, gaming consoles
+                                </option>
+                                <option
+                                    value="office-equipment(Printers, scanners, photocopiers, fax machines, and multifunction devices)">
+                                    Office
+                                    Equipment - Printers, scanners, copiers, fax machines</option>
+                                <option
+                                    value="networking-equipment Routers, switches, modems, and other networking hardware">
+                                    Networking
+                                    Equipment - Routers,
+                                    switches, modems</option>
+                                <option
+                                    value="small-appliances Microwaves, toasters, blenders, coffee makers, and other small household appliances that contain electronic components">
+                                    Small Appliances - Microwaves, toasters, blenders</option>
+                                <option
+                                    value="batteries Rechargeable batteries and other types of batteries commonly used in electronic devices">
+                                    Batteries - Rechargeable batteries</option>
+                                <option
+                                    value="cables-wires Various cables and wires used for connectivity and power supply in electronic devices">
+                                    Cables and Wires - Various cables and wires</option>
+                                <option
+                                    value="medical-devices Equipment used in healthcare settings, such as medical monitors, infusion pumps, and diagnostic devices">
+                                    Medical Devices - Medical monitors, infusion pumps</option>
+                                <option
+                                    value="gaming-accessories Controllers, headsets, and other accessories used with gaming consoles and PCs">
+                                    Gaming
+                                    Accessories - Controllers, headsets</option>
+                            </select>
+                        </div>
+                        <div class="form-group m-2">
+                            <label>Product Name</label>
+                            <input type="text" class="form-control"
+                                placeholder="Enter the product name that you want to recover" id="product_name">
+                        </div>
+                        <div class="form-group m-2">
+                            <label>Product Model</label>
+                            <input type="email" class="form-control" placeholder="Enter the Model Name of Product"
+                                id="product_model">
+                        </div>
+                        <div class="form-group m-2">
+                            <label>Product Specifications</label>
+                            <input type="email" class="form-control" placeholder="Enter the Specifications of product"
+                                id="product_specification">
+                        </div>
+                        <div class="form-group m-2">
+                            <label>Product base Price</label>
+                            <input type="tel" class="form-control"
+                                placeholder="Enter the maximum prices that you want to offer." id="product_baseprice">
+                        </div>
+
+                        <div class="form-group m-2">
+                            <label>Define you deductions here.</label>
+
+                            <ul class="text-success">
+                                <li><b>For Example:</b> If Scratch=10 (Per Unit) which means that 10Rs per unit will be
+                                    deduct from the
+                                    base price on user side.</li>
+                                <li><b>For Example: </b>If Battery issues = 20 (No Unit Required) which means that only
+                                    20 Rs
+                                    will be deduct from the base price on user side</li>
+                            </ul>
+                            <div class="key-value-pairs mt-3" id="keyValuePairs">
+                                <div class="form-row mb-2">
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="Scratch">
+                                    </div>
+                                    <p>=</p>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="10">
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Select Unit</option>
+                                            <option value="Per Unit">Per Unit</option>
+                                            <option value="No Unit Required">No Unit Required</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-success"
+                                            onclick="addKeyValuePair()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group m-2">
+                            <label>Instructions</label>
+                            <textarea class="form-control"
+                                placeholder="Enter the instructions that user should follow while handover product to collections centre"
+                                id="product_instructions"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-4">
+                    <h2 class="text-success">Upload Image of Product</h2>
+                    <div class="m-3" style="text-align: center;">
+                        <img class="img-fluid" src="/static/images/seeProfile.png" id="image_preview" width="300px"
+                            height="300px" style="border-radius: 10px;">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success mt-5 mb-5" style="display: block;margin: 0 auto;"
+            id="submit">Submit</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyChtcoj-0g8LcHXW26Tyqkm_7Xxj8jG5Ow",
+            authDomain: "food-blur.firebaseapp.com",
+            projectId: "food-blur",
+            storageBucket: "food-blur.appspot.com",
+            messagingSenderId: "911842353467",
+            appId: "1:911842353467:web:3107951f8434294e96571e",
+            measurementId: "G-9WG8FE55NE"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const dataRef = firebase.firestore();
+        const storage = firebase.storage();
+        document.getElementById('submit').addEventListener('click', () => {
+            var file = document.getElementById("file").files[0];
+            storage.ref().child(file.name).put(file).then((snapshot) => {
+                storage.ref().child(file.name).getDownloadURL().then((url) => {
+                    console.log(url);
+                    p_set_listed_product(url)
+                    console.log("Image uploaded successfully");
+                })
+            })
+        })
+    </script>
+    <script>
+        function addKeyValuePair() {
+            var keyValuePairs = document.getElementById("keyValuePairs");
+            var newRow = document.createElement("div");
+            newRow.className = "form-row mb-2";
+            newRow.innerHTML = `
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Key">
+            </div>
+            <p>=</p>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Value">
+            </div>
+            <div class="col">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Select Unit</option>
+                                            <option value="Per Unit"">Per Unit</option>
+                                            <option value="No Unit Required">No Unit Required</option>
+                                        </select>
+                                    </div>
+            <div class="col-auto">
+              <button class="btn btn-danger" onclick="removeKeyValuePair(this)">Remove</button>
+            </div>
+          `;
+            keyValuePairs.appendChild(newRow);
+        }
+
+        function removeKeyValuePair(button) {
+            var row = button.parentElement.parentElement;
+            row.remove();
+        }
+
+        document.getElementById("file").addEventListener("change", function (event) {
+            var imagePreview = document.getElementById("image_preview");
+            imagePreview.innerHTML = "";
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function logKeyValuePairs() {
+            const keyValuePairs = document.querySelectorAll(".form-row.mb-2");
+            const keyValuePairsArray = [];
+          
+            keyValuePairs.forEach((pair, index) => {
+              const inputs = pair.querySelectorAll("input[type='text']");
+              const select = pair.querySelector("select");
+          
+              if (inputs.length >= 2) {
+                const key = inputs[0].value;
+                const value = inputs[1].value;
+                const unit = select ? select.value : null;
+          
+                keyValuePairsArray.push({ key, value, unit });
+              }
+            });
+          
+            console.log(keyValuePairsArray);
+            return keyValuePairsArray;
+          }
+          
+
+        function p_set_listed_product(url) {
+            var product_category = document.getElementById('product_category').value
+            var product_name = document.getElementById('product_name').value
+            var product_model = document.getElementById('product_model').value
+            var product_specification = document.getElementById('product_specification').value
+            var product_baseprice = document.getElementById('product_baseprice').value
+            var deductions = JSON.stringify(logKeyValuePairs())
+            var file = document.getElementById('file').files[0]
+            var product_instructions = document.getElementById('product_instructions').value
+            console.log(product_instructions)
+
+            var formData = new FormData();
+            formData.append('product_category', product_category);
+            formData.append('product_name', product_name);
+            formData.append('product_model', product_model);
+            formData.append('product_specification', product_specification);
+            formData.append('product_baseprice', product_baseprice);
+            formData.append('deductions', JSON.stringify(logKeyValuePairs()));
+            formData.append('product_url', url);
+            formData.append('file', file);
+            formData.append('product_instructions', product_instructions);
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('p_set_listed_product')}}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status == 'success') {
+                        alert(response.message)
+                    } else {
+                        if (response.status == 'error') {
+                            alert(response.message)
+                        } else {
+                            alert('Something went wrong')
+                        }
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                    alert(error)
+                }
+            })
+        }
+    </script>
+
+</body>
+
+</html>

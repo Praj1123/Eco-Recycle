@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC Sign_in_Sign_up</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI';
+            font-size: 25px;
+        }
+
+        .form input {
+            min-width: 400px;
+            display: block;
+            margin: 20px;
+            padding: 15px 20px;
+            background-color: #ece7e7;
+            font-size: 20px;
+            border: none;
+            outline: none;
+            box-shadow: 15px 15px 25px #a8a8a8;
+            transition: box-shadow 0.5s;
+        }
+
+        .form input:focus {
+            box-shadow: 5px 5px 15px #a8a8a8;
+        }
+
+        .form .btn {
+            margin: auto;
+            padding: 10px 35px;
+            background-color: #067451;
+            color: #fff;
+            border: none;
+            font-size: 22px;
+            border-radius: 10px;
+            box-shadow: 15px 15px 20px #a8a8a8;
+            transition: box-shadow 0.5s;
+            outline: none;
+        }
+
+        .form .btn:hover {
+            box-shadow: 5px 5px 15px #aaa;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 50vh;
+            width: 50vw;
+            position: absolute;
+            bottom: 0px;
+            font-size: 35px;
+        }
+
+        .left-section .form {
+            float: left;
+            margin: 35vh auto;
+        }
+
+        .right-section .form {
+            float: right;
+            margin: 30vh auto;
+            right: 0;
+        }
+
+        .cover .switch-btn {
+            position: absolute;
+            bottom: 0;
+            font-size: 25px;
+            margin: 40vh auto;
+            padding: 10px 55px;
+            background-color: #067451;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 15px 15px 25px #a8a8a8;
+            transition: box-shadow 0.5s;
+            outline: none;
+        }
+
+        .cover .switch-btn:hover {
+            box-shadow: 5px 5px 15px #aaa;
+        }
+
+        .left-section .cover {
+            float: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .left-section .cover img {
+            height: 100vh;
+            width: 50vw;
+        }
+
+        .left-section .cover h1 {
+            position: absolute;
+            bottom: 0;
+            margin: 60vh auto;
+            color: #fff;
+            font-size: 50px;
+        }
+
+        .left-section .cover h3 {
+            position: absolute;
+            bottom: 0;
+            margin: 50vh auto;
+            color: #fff;
+            font-size: 35px;
+        }
+
+        .left-section .cover-hide {
+            visibility: hidden;
+        }
+
+        .left-section .form-hide {
+            visibility: hidden;
+        }
+
+        .right-section .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .right-section .cover img {
+            height: 100vh;
+            width: 50vw;
+        }
+
+        .right-section .cover h1 {
+            position: absolute;
+            bottom: 0;
+            margin: 60vh auto;
+            font-size: 50px;
+            color: #fff;
+        }
+
+        .right-section .cover h3 {
+            position: absolute;
+            bottom: 0;
+            margin: 50vh auto;
+            color: #fff;
+            font-size: 35px;
+        }
+
+        .right-section .cover-hide {
+            visibility: hidden;
+        }
+
+        .right-section .form-hide {
+            visibility: hidden;
+        }
+
+        .fade-in-element {
+            animation-name: fade-in-element;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fade-in-element {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-8">
+                <section class="left-section">
+                    <div id="left-cover" class="cover cover-hide">
+                        <img src="/static/images/backgroun.png" alt="">
+                        <h1>Welcome !</h1>
+                        <h3>Already have an account ?</h3>
+                        <button type="button" class="switch-btn" onclick="location.reload()">Login</button>
+                    </div>
+                    <div id="left-form" class="form fade-in-element">
+                        <h1>Login</h1>
+                        <form action="" method="post">
+                            <input type="text" name="user-name" class="input-box" placeholder="Email" id="signin_email">
+                            <input type="password" name="user-pass" class="input-box" placeholder="Password"
+                                id="signin_password">
+                            <input type="button" name="login-btn" class="btn" value="Login" id="sign_in">
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="col-sm-4">
+                <section class="right-section">
+                    <div id="right-cover" class="cover fade-in-element">
+                        <img src="/static/images/backgroun.png" alt="">
+                        <h1>Welcome !</h1>
+                        <h3>Don't have an account ?</h3>
+                        <button type="button" class="switch-btn" onclick="switchSignup()">Signup</button>
+                    </div>
+                    <div id="right-form" class="form form-hide">
+                        <h1>Signup</h1>
+                        <form action="" method="post">
+                            <input type="text" name="user-name" class="input-box" placeholder="Email" id="signup_email">
+                            <input type="password" name="user-pass" class="input-box" placeholder="Password"
+                                id="signup_password">
+                            <input type="password" name="user-cpass" class="input-box" placeholder="Confirm Password"
+                                id="signup_confirm_password">
+                            <input type="button" name="signup-btn" class="btn" value="Signup" id="sign_up">
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+
+        var left_cover = document.getElementById("left-cover");
+        var left_form = document.getElementById("left-form");
+
+        var right_cover = document.getElementById("right-cover");
+        var right_form = document.getElementById("right-form");
+
+        function switchSignup() {
+            right_form.classList.add("fade-in-element");
+            left_cover.classList.add("fade-in-element");
+
+            left_form.classList.add("form-hide");
+            left_cover.classList.remove("cover-hide");
+            right_form.classList.remove("form-hide");
+            right_cover.classList.add("cover-hide");
+        }
+
+
+        function c_search_user_in_database() {
+            var email = document.getElementById("signup_email").value
+            var password = document.getElementById("signup_password").value
+            var confirm_password = document.getElementById("signup_confirm_password").value
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_search_user_in_database')}}",
+                data: { 'email': email, 'password': password },
+                success: function (response) {
+                    if (response.status == 'success') {
+                        console.log(response.message)
+                        alert(response.message)
+                    } else {
+                        if (response.status == 'error') {
+                            console.log(response.message)
+                            c_send_user_data()
+                        } else {
+                            console.log('Something went wrong')
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert('We have some technical problem')
+                    console.log(error)
+
+                }
+            })
+        }
+
+        function c_send_user_data() {
+            var email = document.getElementById("signup_email").value
+            var password = document.getElementById("signup_password").value
+            console.log(email, password)
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_send_user_data')}}",
+                data: { 'email': email, 'password': password },
+                success: function (response) {
+                    if (response.status == 'success') {
+                        alert(response.message + 'Sign in with same email and password')
+                        window.location.reload(true)
+                    } else {
+                        console.log('Something went wrong')
+                    }
+                },
+                error: function (error) {
+                    alert('We have some technical problem')
+                    console.log(error)
+
+                }
+            })
+
+
+        }
+
+
+
+        document.getElementById('sign_up').addEventListener('click', () => {
+            var email = document.getElementById('signup_email').value
+            var password = document.getElementById('signup_password').value
+            var confirm_password = document.getElementById('signup_confirm_password').value
+            if (email == "") {
+                alert('Email Required')
+            } else {
+                if (password == "") {
+                    alert('Password Required')
+                } else {
+                    if (confirm_password == "") {
+                        alert('Confirm Password Required')
+                    } else {
+                        if (password != confirm_password) {
+                            alert('Password and Confirm Password not match')
+                        } else {
+                            c_search_user_in_database()
+                        }
+                    }
+                }
+            }
+        })
+
+
+        function cc_search_user_in_database() {
+            var email = document.getElementById("signin_email").value
+            var password = document.getElementById("signin_password").value
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_search_user_in_database')}}",
+                data: { 'email': email, 'password': password },
+                success: function (response) {
+                    if (response.status == 'success') {
+                        console.log(response.message)
+                        c_get_user_data()
+                    } else {
+                        if (response.status == 'error') {
+                            console.log(response.message)
+                            alert(response.message)
+                        } else {
+                            console.log('Something went wrong')
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert('We have some technical problem')
+                    console.log(error)
+
+                }
+            })
+        }
+        function c_get_user_data() {
+            var email = document.getElementById("signin_email").value
+            var password = document.getElementById("signin_password").value
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('c_get_user_data')}}",
+                data: { 'email': email, "password": password },
+                success: function (response) {
+                    if (response.status == 'success') {
+                        alert(response.message)
+                        window.location.href = '/c_Dashboard'
+                    } else {
+                        if (response.status == 'error') {
+                            alert(response.message)
+                        } else {
+                            alert('Something went wrong')
+                        }
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                    alert('We have some technical problem')
+                }
+            })
+
+        }
+
+
+        document.getElementById('sign_in').addEventListener('click', () => {
+            var email = document.getElementById('signin_email').value
+            var password = document.getElementById('signin_password').value
+            if (email == "") {
+                alert('Email Required')
+            } else {
+                if (password == "") {
+                    alert('Password Required')
+                } else {
+                    cc_search_user_in_database()
+                }
+            }
+        })
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
