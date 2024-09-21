@@ -13,7 +13,7 @@ from werkzeug.exceptions import BadRequestKeyError
 app = Flask(__name__)
 
 app.secret_key = "hellow_EcoRecycle"
-client = MongoClient("mongodb://localhost:27017")
+client = MongoClient("mongodb+srv://admin:admin@cluster0.1vdva.mongodb.net/",)
 db = client["EcoRecycle"]
 users_collection = db["users"]
 
