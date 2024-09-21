@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template, session
 import vonage
 import random
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 from bson import json_util
 from bson import ObjectId
 from bson.json_util import dumps
@@ -13,7 +14,19 @@ from werkzeug.exceptions import BadRequestKeyError
 app = Flask(__name__)
 
 app.secret_key = "hellow_EcoRecycle"
-client = MongoClient("mongodb+srv://admin:admin@cluster0.1vdva.mongodb.net/",)
+try:
+    # Connect to the MongoDB server
+    client = MongoClient("mongodb+srv://admin:admin@cluster0.1vdva.mongodb.net/")
+    
+    # Check the connection by retrieving the server info
+    client.server_info()  # This will raise an exception if the connection fails
+
+    print("Connection successful!")
+
+except ConnectionFailure as e:
+    print(f"Connection failed: {e}")
+except Exception as e:
+    print(f"An error occurred: {e}")
 db = client["EcoRecycle"]
 users_collection = db["users"]
 
